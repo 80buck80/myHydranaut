@@ -34,6 +34,7 @@ function FrontPage()
 
   this.draw = function()
   {
+    
     image(this.sceneManager.bkImage, 0, 0);//display the bg image
     image(this.sceneManager.hydra, 0, 0);//display hydra image
     circle.display();
