@@ -11,6 +11,34 @@ var nodeImageArr;
 // var nodeImage;
 // var nodeSpriteSheet;
 
+class Node
+{
+    constructor(x, y, radius, number)
+    {
+      this.x = x;
+      this.y = y;
+      this.radius = radius;
+      this.number = number
+    }
+
+    display()
+    {
+      //noStroke();
+      noFill();
+      ellipse(this.x, this.y, this.radius);
+    }
+
+    //CHECK IF CLICK WAS MADE INSIDE THE CIRCLE
+    clicked(x, y)
+    {
+      let d = dist(x, y, this.x, this.y);
+      if(d < this.radius)
+      {
+        return true;
+      }
+    }
+}
+
 
 //PLAYER CLASS
 class Player
@@ -27,6 +55,7 @@ class Player
 
   display()
   {
+    
     image(this.piece,this.x, this.y, this.width, this.height);
   }
 
@@ -85,6 +114,7 @@ function setup()
     mgr.hydra = hydra;
     mgr.worldsMap = worldsMap;
     mgr.worldMap1 = worldMap1;
+    mgr.player1Piece = player1Piece;
     //mgr.nodeArray = nodeImageArr;
     //mgr.nodeSpriteSheet = nodeSpriteSheet;
 
