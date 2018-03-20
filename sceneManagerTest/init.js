@@ -55,7 +55,7 @@ class Player
 
   display()
   {
-    
+
     image(this.piece,this.x, this.y, this.width, this.height);
   }
 
@@ -67,6 +67,54 @@ class Player
     this.y = targetNode.y - 50;
     this.display();
   }
+}
+
+class Puzzle
+{
+  constructor()
+  {
+    this.currentNode;
+    this.x;
+    this.y;
+    this.width = 700;
+    this.height = 300;
+    this.radius = 20;
+    this.visible = false;
+  }
+
+  setPosition(targetNode)
+  {
+    this.currentNode = targetNode;
+    this.x = targetNode.x + 20;
+    this.y = targetNode.y - this.height - 20;
+
+  }
+
+  display()
+  {
+    if(this.visible)
+    {
+      fill(255, 255, 255, 150);
+      stroke(0, 100, 150);
+      strokeWeight(3);
+      rect(this.x, this.y, this.width, this.height, this.radius);
+
+      //BUTTON...THE STUPID WAY TO DO IT
+      rectMode(CENTER);
+      rect(this.x + this.width/2, this.y + this.height/8*7, 100, 50, 20);
+      strokeWeight(0);
+      fill(0, 100, 150)
+      textSize(24);
+      text('close', this.x-27 + this.width/2, this.y+5 + this.height/8*7);
+    }
+  }
+
+  dismiss()
+  {
+    this.visible = false;
+  }
+
+
 }
 
 

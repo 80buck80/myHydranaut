@@ -33,7 +33,9 @@ function World1()
     [10, 9]
   ];
 
- var player = new Player(node0, player1Piece);
+  var player = new Player(node0, player1Piece);
+  var currentNode = player.currentNode;
+  var puzzle = new Puzzle();
 
   this.draw = function()
   {
@@ -49,7 +51,7 @@ function World1()
     //DISPLAY PLAYER
     player.display();
 
-
+    puzzle.display();
 
     // image(this.sceneManager.nodeArray[0], 305, 140, 70, 70);
     // image(this.sceneManager.nodeArray[1], 530, 145, 70, 70);
@@ -67,7 +69,9 @@ function World1()
 
   this.mousePressed = function()
   {
-    for(i = 0; i < nodeArray.length; i++){
+    for(i = 0; i < nodeArray.length; i++)
+    {
+      //CHECK IF CLICKED INSIDE OF A NODE
       if(nodeArray[i].clicked(mouseX, mouseY))
       {
         this.adjSearch(nodeArray[i]);
@@ -85,13 +89,20 @@ function World1()
     let r = player.currentNode.number;
     let c = targetNode.number;
 
-    for(i = 1; i < adjMatrix[r].length; i++){
-      if(adjMatrix[r][i] == c){
+    for(i = 1; i < adjMatrix[r].length; i++)
+    {
+      if(adjMatrix[r][i] == c)
+      {
         player.move(targetNode);
+        this.currentNode = targetNode;
+        puzzle.setPosition(targetNode); 
+        puzzle.visible = true;
         return;
       }
     }
   }
+
+
 
 
 
