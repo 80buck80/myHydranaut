@@ -95,8 +95,9 @@ function World1()
       {
         player.move(targetNode);
         this.currentNode = targetNode;
-        puzzle.setPosition(targetNode); 
+        puzzle.setPosition(targetNode);
         puzzle.visible = true;
+        clear();
         return;
       }
     }

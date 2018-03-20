@@ -80,6 +80,7 @@ class Puzzle
     this.height = 300;
     this.radius = 20;
     this.visible = false;
+    this.questions = ['Sample question 1', 'Sample Question 2', 'Sample Question 3'];
   }
 
   setPosition(targetNode)
@@ -94,24 +95,52 @@ class Puzzle
   {
     if(this.visible)
     {
-      fill(255, 255, 255, 150);
+      //POP UP
+      fill(10, 10, 10, 200);
       stroke(0, 100, 150);
       strokeWeight(3);
       rect(this.x, this.y, this.width, this.height, this.radius);
 
-      //BUTTON...THE STUPID WAY TO DO IT
+      //PUZZLE TEXT
+      strokeWeight(0);
+      fill(255);
+      textSize(12);
+      text(this.questions[0].toString(), this.x + 20, this.y + 20);
+
+
+      //BUTTON
+      var buttonX = this.x + this.width/2;
+      var buttonY = this.y + this.height/9*8;
+      var buttonWidth = 80;
+      var buttonHeight = 25;
+      var buttonRadius = 5;
       rectMode(CENTER);
-      rect(this.x + this.width/2, this.y + this.height/8*7, 100, 50, 20);
+      rect(buttonX, buttonY, buttonWidth, buttonHeight, buttonRadius);
+
+      //BUTTON TEXT
       strokeWeight(0);
       fill(0, 100, 150)
       textSize(24);
-      text('close', this.x-27 + this.width/2, this.y+5 + this.height/8*7);
+      textAlign(CENTER);
+      text('close', buttonX, buttonY + 7);
     }
   }
 
   dismiss()
   {
     this.visible = false;
+  }
+
+  //CHECK IF CLICK WAS MADE INSIDE THE BUTTON
+  clicked(x, y)
+  {
+
+    //let r = dist(x, y, buttonX, buttonY);
+    let dx = abs()
+    if(d < this.radius)
+    {
+      return true;
+    }
   }
 
 
