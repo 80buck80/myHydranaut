@@ -78,6 +78,11 @@ function World1()
         return;
       }
     }
+
+    if(puzzle.clicked(mouseX, mouseY))
+    {
+      puzzle.dismiss();
+    }
   }
 
   this.adjSearch = function(targetNode)

@@ -74,21 +74,24 @@ class Puzzle
   constructor()
   {
     this.currentNode;
-    this.x;
-    this.y;
+    this.x = width/4;
+    this.y = height/4;
     this.width = 700;
     this.height = 300;
     this.radius = 20;
     this.visible = false;
     this.questions = ['Sample question 1', 'Sample Question 2', 'Sample Question 3'];
+    this.buttonX = this.x + this.width/2;
+    this.buttonY = this.y + this.height/9*8;
+    this.buttonWidth = 80;
+    this.buttonHeight = 25;
+    this.buttonRadius = 5;
+
   }
 
   setPosition(targetNode)
   {
     this.currentNode = targetNode;
-    this.x = targetNode.x + 20;
-    this.y = targetNode.y - this.height - 20;
-
   }
 
   display()
@@ -104,30 +107,44 @@ class Puzzle
       //PUZZLE TEXT
       strokeWeight(0);
       fill(255);
-      textSize(12);
-      text(this.questions[0].toString(), this.x + 20, this.y + 20);
+      textSize(24);
+      switch(this.currentNode.number)
+      {
+        case 1:
+              text(this.questions[0].toString(), this.x + 20, this.y + 25);
+              break;
+        case 2:
+              text(this.questions[1].toString(), this.x + 20, this.y + 25);
+              break;
+        case 3:
+              text(this.questions[2].toString(), this.x + 20, this.y + 25);
+              break;
+
+      }
+
 
 
       //BUTTON
-      var buttonX = this.x + this.width/2;
-      var buttonY = this.y + this.height/9*8;
-      var buttonWidth = 80;
-      var buttonHeight = 25;
-      var buttonRadius = 5;
+      this.buttonX = this.x + this.width/2;
+      this.buttonY = this.y + this.height/9*8;
+      this.buttonWidth = 80;
+      this.buttonHeight = 25;
+      this.buttonRadius = 5;
       rectMode(CENTER);
-      rect(buttonX, buttonY, buttonWidth, buttonHeight, buttonRadius);
+      rect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight, this.buttonRadius);
 
       //BUTTON TEXT
       strokeWeight(0);
       fill(0, 100, 150)
       textSize(24);
       textAlign(CENTER);
-      text('close', buttonX, buttonY + 7);
+      text('close', this.buttonX, this.buttonY + 7);
     }
   }
 
   dismiss()
   {
+    clear();
     this.visible = false;
   }
 
@@ -135,9 +152,10 @@ class Puzzle
   clicked(x, y)
   {
 
-    //let r = dist(x, y, buttonX, buttonY);
-    let dx = abs()
-    if(d < this.radius)
+    //let r = dist(x, y, this.buttonX, this.buttonY);
+    var dx = abs(x - this.buttonX);
+    var dy = abs(y - this.buttonY);
+    if(dx <= this.buttonWidth && dy <= this.buttonHeight)
     {
       return true;
     }
