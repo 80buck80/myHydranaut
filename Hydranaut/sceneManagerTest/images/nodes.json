@@ -1,0 +1,83 @@
+[
+  {
+    "name": "topLeft.png",
+    "frame": {
+      "x": "0",
+      "y": "0",
+      "width": "216",
+      "height": "216"
+    }
+  },
+  {
+    "name": "topMiddle.png",
+    "frame": {
+      "x": "216",
+      "y": "0",
+      "width": "216",
+      "height": "216"
+    }
+  },
+  {
+    "name": "topRight.png",
+    "frame": {
+      "x": "432",
+      "y": "0",
+      "width": "216",
+      "height": "216"
+    }
+  },
+  {
+    "name": "middleLeft.png",
+    "frame": {
+      "x": "0",
+      "y": "216",
+      "width": "216",
+      "height": "216"
+    }
+  },
+  {
+    "name": "middleMiddle.png",
+    "frame": {
+      "x": "216",
+      "y": "216",
+      "width": "216",
+      "height": "216"
+    }
+  },
+  {
+    "name": "middleRight.png",
+    "frame": {
+      "x": "432",
+      "y": "216",
+      "width": "216",
+      "height": "216"
+    }
+  },
+  {
+    "name": "bottomLeft.png",
+    "frame": {
+      "x": "0",
+      "y": "432",
+      "width": "216",
+      "height": "216"
+    }
+  },
+  {
+    "name": "bottomMiddle.png",
+    "frame": {
+      "x": "216",
+      "y": "432",
+      "width": "216",
+      "height": "216"
+    }
+  },
+  {
+    "name": "bottomRight.png",
+    "frame": {
+      "x": "432",
+      "y": "432",
+      "width": "216",
+      "height": "216"
+    }
+  }
+]
