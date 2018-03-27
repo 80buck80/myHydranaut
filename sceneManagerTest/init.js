@@ -23,7 +23,7 @@ class Node
 
     display()
     {
-      //noStroke();
+      noStroke();
       noFill();
       ellipse(this.x, this.y, this.radius);
     }

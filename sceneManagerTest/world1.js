@@ -3,6 +3,7 @@
 
 function World1()
 {
+  //MAKE NODES AND PLACE THEM (X, Y, RADIUS, NODE NUMBER)
   var node0 = new Node(200, 435, 75, 0);
   var node1 = new Node(238, 360, 50, 1);
   var node2 = new Node(283, 257, 50, 2);
@@ -18,6 +19,8 @@ function World1()
                    node3, node4, node5,
                    node6, node7, node8,
                    node9, node10];
+
+                   
 
   var adjMatrix = [
     [0, 1],
@@ -53,22 +56,11 @@ function World1()
 
     puzzle.display();
 
-    // image(this.sceneManager.nodeArray[0], 305, 140, 70, 70);
-    // image(this.sceneManager.nodeArray[1], 530, 145, 70, 70);
-    // image(this.sceneManager.nodeArray[2], 830, 170, 70, 70);
-    // image(this.sceneManager.nodeArray[3], 245, 310, 70, 70);
-    // image(this.sceneManager.nodeArray[4], 590, 310, 70, 70);
-    // image(this.sceneManager.nodeArray[5], 850, 310, 70, 70);
-    // image(this.sceneManager.nodeArray[6], 210, 440, 70, 70);
-    // image(this.sceneManager.nodeArray[7], 570, 400, 70, 70);
-    // image(this.sceneManager.nodeArray[8], 900, 400, 70, 70);
-
-
-
   }
 
   this.mousePressed = function()
   {
+    //CHECKS ALL NODES FOR A CLICK
     for(i = 0; i < nodeArray.length; i++)
     {
       //CHECK IF CLICKED INSIDE OF A NODE
@@ -79,6 +71,7 @@ function World1()
       }
     }
 
+    //CHECK IFBUTTON IN PUZZLE IS CLICKED
     if(puzzle.clicked(mouseX, mouseY))
     {
       puzzle.dismiss();
