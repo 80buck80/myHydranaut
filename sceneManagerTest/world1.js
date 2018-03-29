@@ -20,7 +20,7 @@ function World1()
                    node6, node7, node8,
                    node9, node10];
 
-                   
+
 
   var adjMatrix = [
     [0, 1],
@@ -37,7 +37,6 @@ function World1()
   ];
 
   var player = new Player(node0, player1Piece);
-  var currentNode = player.currentNode;
   var puzzle = new Puzzle();
 
   this.draw = function()
@@ -54,7 +53,8 @@ function World1()
     //DISPLAY PLAYER
     player.display();
 
-    puzzle.display();
+    //DISPLAY POP-UP
+    puzzle.display(player.currentNode);
 
   }
 

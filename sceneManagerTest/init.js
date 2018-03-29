@@ -6,7 +6,8 @@ var worldsMap;
 var worldMap1;
 var player1Piece;//temp player token
 var nodeImageArr;
-var questionsArr;
+var world1Questions;
+
 
 class Node
 {
@@ -76,8 +77,7 @@ class Puzzle
     this.width = 700;
     this.height = 300;
     this.radius = 20;
-    this.visible = false;
-    // this.questions = ['Going on the space adventure requires that your spaceship is NOT broken. After an inspection of the ship you find that you ship’s rockets are not working. Will you be able to go on the space adventure?', 'Sample Question 2', 'Sample Question 3'];
+    this.visible = true;
     this.buttonX = this.x + this.width/2;
     this.buttonY = this.y + this.height/9*8;
     this.buttonWidth = 80;
@@ -91,8 +91,10 @@ class Puzzle
     this.currentNode = targetNode;
   }
 
-  display()
+  display(currentNode)
   {
+    this.currentNode = currentNode;
+
     if(this.visible)
     {
       //POP UP
@@ -107,14 +109,17 @@ class Puzzle
       textSize(24);
       switch(this.currentNode.number)
       {
+        case 0:
+              text(world1Questions[0].welcome, this.x + 20, this.y + 25, 700, 300);
+              break;
         case 1:
-              text(this.questions[0].toString(), this.x + 20, this.y + 25, 700, 300);
+              text(world1Questions[1].question, this.x + 20, this.y + 25, 700, 300);
               break;
         case 2:
-              text(this.questions[1].toString(), this.x + 20, this.y + 25);
+              text(world1Questions[2].question, this.x + 20, this.y + 25, 700, 300);
               break;
         case 3:
-              text(this.questions[2].toString(), this.x + 20, this.y + 25);
+              text(world1Questions[3].question, this.x + 20, this.y + 25, 700, 300);
               break;
 
       }
@@ -173,6 +178,8 @@ function preload()
     worldMap1 = loadImage('images/full-world.png');
     player1Piece = loadImage('images/gamePiece.png');//load player piece (434X720)
 
+    //LOAD QUESTIONS FROM JSON FILE
+    world1Questions = loadJSON("world1Questions.json");
 }
 
 function setup()
@@ -183,7 +190,7 @@ function setup()
     cnv.position(windowCenterX, windowCenterY);
 
 
-    // //CREATE THE SCENE MANAGER
+    //CREATE THE SCENE MANAGER
     var mgr = new SceneManager();
 
     //LOAD ALL IMAGES INTO THE SCENE MANAGER
@@ -192,10 +199,6 @@ function setup()
     mgr.worldsMap = worldsMap;
     mgr.worldMap1 = worldMap1;
     mgr.player1Piece = player1Piece;
-
-    //LOAD QUESTIONS FROM JSON FILE
-    loadJSON("questions.json", loadQuestionArray);
-
 
     //DONT KNOW WHAT THIS DOES
     mgr.wire();
@@ -206,12 +209,4 @@ function setup()
 
 function windowResized() {
   centerCanvas();
-}
-
-function loadQuestionArray(question)
-{
-  for(i = 0; i < question.length; i++)
-  {
-    questionsArr[i] = question[i];
-  }
 }
