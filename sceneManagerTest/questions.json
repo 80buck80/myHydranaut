@@ -1,0 +1,9 @@
+[
+  {"notQuestion1": "Going on the space adventure requires that your spaceship is NOT broken. After an inspection of the ship you find that you ship’s rockets are not working. Will you be able to go on the space adventure?"
+  },
+  {"notQuestion2": "You fix your spaceship and are ready to go. You plot a course to your destination and are ready to make to the jump to hyperspace. Before you can go, the course must NOT have any obstacles in the way. You review the course and find that it is free of obstacles. Can you make the jump to hyperspace?"
+  },
+  {"notQuestion3": "You make the jump, arrive at the planet, and are ready to land. To land, the spaceship must NOT be going too fast. The speed indicator shows that the ship is in the correct speed range. Are you ready to land?"
+  }
+  
+]

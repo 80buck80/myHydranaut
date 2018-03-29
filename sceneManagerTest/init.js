@@ -6,10 +6,7 @@ var worldsMap;
 var worldMap1;
 var player1Piece;//temp player token
 var nodeImageArr;
-
-// var nodeJson;
-// var nodeImage;
-// var nodeSpriteSheet;
+var questionsArr;
 
 class Node
 {
@@ -80,7 +77,7 @@ class Puzzle
     this.height = 300;
     this.radius = 20;
     this.visible = false;
-    this.questions = ['Sample question 1', 'Sample Question 2', 'Sample Question 3'];
+    // this.questions = ['Going on the space adventure requires that your spaceship is NOT broken. After an inspection of the ship you find that you ship’s rockets are not working. Will you be able to go on the space adventure?', 'Sample Question 2', 'Sample Question 3'];
     this.buttonX = this.x + this.width/2;
     this.buttonY = this.y + this.height/9*8;
     this.buttonWidth = 80;
@@ -111,7 +108,7 @@ class Puzzle
       switch(this.currentNode.number)
       {
         case 1:
-              text(this.questions[0].toString(), this.x + 20, this.y + 25);
+              text(this.questions[0].toString(), this.x + 20, this.y + 25, 700, 300);
               break;
         case 2:
               text(this.questions[1].toString(), this.x + 20, this.y + 25);
@@ -176,21 +173,6 @@ function preload()
     worldMap1 = loadImage('images/full-world.png');
     player1Piece = loadImage('images/gamePiece.png');//load player piece (434X720)
 
-    // nodeImageArr = [loadImage('images/topLeft.png'),
-    //                 loadImage('images/topMiddle.png'),
-    //                 loadImage('images/topRight.png'),
-    //                 loadImage('images/middleLeft.png'),
-    //                 loadImage('images/middleMiddle.png'),
-    //                 loadImage('images/middleRight.png'),
-    //                 loadImage('images/bottomLeft.png'),
-    //                 loadImage('images/bottomMiddle.png'),
-    //                 loadImage('images/bottomRight.png')];
-
-    // nodeImage =loadImage('images/node-spritesheet.png');
-    // nodeJson = loadJSON('images/nodes.json');
-    // nodeSpriteSheet = loadSpriteSheet(nodeImage, nodeJson);
-
-
 }
 
 function setup()
@@ -210,8 +192,9 @@ function setup()
     mgr.worldsMap = worldsMap;
     mgr.worldMap1 = worldMap1;
     mgr.player1Piece = player1Piece;
-    //mgr.nodeArray = nodeImageArr;
-    //mgr.nodeSpriteSheet = nodeSpriteSheet;
+
+    //LOAD QUESTIONS FROM JSON FILE
+    loadJSON("questions.json", loadQuestionArray);
 
 
     //DONT KNOW WHAT THIS DOES
@@ -223,4 +206,12 @@ function setup()
 
 function windowResized() {
   centerCanvas();
+}
+
+function loadQuestionArray(question)
+{
+  for(i = 0; i < question.length; i++)
+  {
+    questionsArr[i] = question[i];
+  }
 }
