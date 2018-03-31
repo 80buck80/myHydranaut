@@ -38,7 +38,9 @@ function World1()
 
   var player = new Player(node0, player1Piece);
   var puzzle = new Puzzle(world1Questions);
-  var closeButton = new Button(puzzle.x + puzzle.width/2, puzzle.y + puzzle.height/9*8, "close");
+  //var closeButton = new Button(puzzle.x + puzzle.width/2, puzzle.y + puzzle.height/9*8, "close");
+  var buttonArray = [];
+
 
   this.draw = function()
   {
@@ -58,7 +60,14 @@ function World1()
     puzzle.display(player.currentNode);
 
     //DISPLAY BUTTON
-    closeButton.display();
+    //closeButton.display();
+    buttonArray = this.puzzleButtons(puzzle, world1Questions);
+
+    if(buttonArray.length !== 0)
+      for(i = 0; i < buttonArray.length; i++)
+      {
+        buttonArray[i].display();
+      }
 
   }
 
@@ -70,21 +79,17 @@ function World1()
       //CHECK IF CLICKED INSIDE OF A NODE
       if(nodeArray[i].clicked(mouseX, mouseY))
       {
-        this.adjSearch(nodeArray[i]);
+        this.adjSearch(nodeArray[i], buttonArray);
         return;
       }
     }
 
-    //CHECK IF CLOSE BUTTON IN PUZZLE IS CLICKED
-    if(closeButton.clicked(mouseX, mouseY))
-    {
-      puzzle.dismiss();
-      closeButton.dismiss();
-    }
+
+
   }
 
   //MOVES THE PLAYER AND SETS POP_UP AND CLOSE BUTTON TO VISIBLE
-  this.adjSearch = function(targetNode)
+  this.adjSearch = function(targetNode, buttonArray)
   {
 
     //TRAVERSE THE ADJACENCY MATRIX AT THE
@@ -101,10 +106,89 @@ function World1()
         this.currentNode = targetNode;
         puzzle.setPosition(targetNode);
         puzzle.visible = true;
-        closeButton.visible = true;
+
+        if(buttonArray.length !== 0)
+          for(i = 0; i < buttonArray.length; i++)
+          {
+            buttonArray[i].visible = true;
+          }
+
+
         clear();
         return;
       }
+    }
+  }
+
+  //CREATES BUTTONS FOR QUESTIONS
+  this.puzzleButtons = function(puzzle, world1Questions)
+  {
+    //GET CURRENT NODE NUMBER
+    var nodeNumber = puzzle.currentNode.number;
+
+    //GET NUMBEROF ANSWER OPTIONS FROM JSON
+    var buttonNumber = world1Questions[nodeNumber].optionNum;
+
+    var buttonColumns;//holds puzzle divisions for buton placement
+    var buttonArr = [];//array to hold button objects
+
+    //DIVIDE PUZZLE INTO COLUMNS FOR BUTTONS TO SIT IN
+    //IF buttonNumber IS EVEN-> DIVIDE INTO 8 COLUMNS, ODD-> 7 COLUMNS
+    //MAKE AND STORE BUTTON OBJECTS INTO buttonArr[]
+    if(buttonNumber % 2 === 0)
+    {
+      buttonColumns = puzzle.width/8;
+
+      //PLACE BUTTONS DEPENDING ON IF THERE ARE 0, 2 OR 4 ANSWER OPTIONS
+      switch(buttonNumber)
+      {
+        case 0:
+              break;
+        case 2:
+              for(i = 0; i < 2; i++)
+              {
+                buttonArr.push(new Button(puzzle.x + buttonColumns*4, puzzle.y + puzzle.height/9*8, world1Questions[nodeNumber].option1));
+
+                buttonArr.push(new Button(puzzle.x + buttonColumns*5, puzzle.y + puzzle.height/9*8, world1Questions[nodeNumber].option2));
+
+              }
+              break;
+        case 4:
+              for(i = 0; i < 4; i++)
+              {
+                buttonArr.push(new Button(puzzle.x + buttonColumns*3, puzzle.y + puzzle.height/9*8, world1Questions[nodeNumber].option1));
+
+                buttonArr.push(new Button(puzzle.x + buttonColumns*4, puzzle.y + puzzle.height/9*8, world1Questions[nodeNumber].option2));
+
+                buttonArr.push(new Button(puzzle.x + buttonColumns*5, puzzle.y + puzzle.height/9*8, world1Questions[nodeNumber].option3));
+
+                buttonArr.push(new Button(puzzle.x + buttonColumns*6, puzzle.y + puzzle.height/9*8, world1Questions[nodeNumber].option4));
+
+              }
+              break;
+      }
+      return buttonArr;
+    }
+    else
+    {
+      buttonColumns = puzzle.width/7;
+
+      //PLACE BUTTONS DEPENDING ON IF THERE ARE 3 ANSWER OPTIONS
+      switch(buttonNumber)
+      {
+        case 3:
+              for(i = 0; i < 2; i++)
+              {
+                buttonArr.push(new Button(puzzle.x + buttonColumns*3, puzzle.y + puzzle.height/9*8, world1Questions[nodeNumber].option1));
+
+                buttonArr.push(new Button(puzzle.x + buttonColumns*4, puzzle.y + puzzle.height/9*8, world1Questions[nodeNumber].option2));
+
+                buttonArr.push(new Button(puzzle.x + buttonColumns*5, puzzle.y + puzzle.height/9*8, world1Questions[nodeNumber].option3));
+
+              }
+              break;
+      }
+      return buttonArr;
     }
   }
 
