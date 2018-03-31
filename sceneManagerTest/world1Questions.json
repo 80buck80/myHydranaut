@@ -77,7 +77,10 @@
       "option4": "Yellow",
       "answer1": "Red",
       "answer2": "Blue"
-
+    },
+    {
+      "lastNode": "Leaving world",
+      "optionNum": 0
     }
 
   ]

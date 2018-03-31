@@ -140,15 +140,15 @@ class Puzzle
 
 class Button
 {
-  constructor(x, y, str)
+  constructor(x, y, width, str)
   {
     //BUTTON LOCATION
     this.buttonX = x;
     this.buttonY = y;
 
     //BUTTON SIZE
-    this.buttonWidth = 80;
-    this.buttonHeight = 25;
+    this.buttonWidth = width/2*24 + 10;
+    this.buttonHeight = 30;
     this.buttonRadius = 5;
 
     //BUTTON TEXT
@@ -156,25 +156,20 @@ class Button
 
     //BUTTON VISIBILITY
     this.visible = true;
+
+    //BUTTON SELECTED STATE
+    this.selected = false;
   }
 
   display()
   {
     if(this.visible)
     {
-      //DRAW BUTTON
-      fill(10, 10, 10, 200);
-      stroke(0, 100, 150);
-      strokeWeight(3);
-      rectMode(CENTER);
+      //this.setButtonStyle();
+      this.setButtonStyle();
       rect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight, this.buttonRadius);
-
-      //BUTTON TEXT
-      strokeWeight(0);
-      fill(0, 100, 150);
-      textSize(24);
-      textAlign(CENTER);
-      text(this.str, this.buttonX, this.buttonY + 7);
+      this.setTextStyle();
+      text(this.str, this.buttonX, this.buttonY + 9);
     }
   }
 
@@ -188,6 +183,86 @@ class Button
       return true;
     }
   }
+
+  setButtonStyle()
+  {
+    if(this.selected)
+    {
+      fill(0, 100, 150);
+      stroke(0, 100, 150);
+      strokeWeight(3);
+      rectMode(CENTER);
+      //rect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight, this.buttonRadius);
+    }
+    else
+    {
+      fill(10, 10, 10, 200);
+      stroke(0, 100, 150);
+      strokeWeight(3);
+      rectMode(CENTER);
+      //rect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight, this.buttonRadius);
+    }
+  }
+
+  setTextStyle()
+  {
+    if(this.selected)
+    {
+      strokeWeight(0);
+      fill(10, 10, 10);
+      textSize(24);
+      textAlign(CENTER);
+      //text(this.str, this.buttonX, this.buttonY + 9);
+    }
+    else
+    {
+      strokeWeight(0);
+      fill(0, 100, 150);
+      textSize(24);
+      textAlign(CENTER);
+    //  text(this.str, this.buttonX, this.buttonY + 9);
+    }
+  }
+
+
+  //SETS THE STYLE OF THE BUTTON DEPENDING IN IF HAS BEEN SELECTED
+  //DRAWS THE BUTTON AND TEXT TO THE CANVAS
+  // setButtonStyle()
+  // {
+  //   if(this.selected)
+  //   {
+  //     print("selected");
+  //     fill(0, 100, 150);
+  //     stroke(0, 100, 150);
+  //     strokeWeight(3);
+  //     rectMode(CENTER);
+  //     rect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight, this.buttonRadius);
+  //
+  //     strokeWeight(0);
+  //     fill(10, 10, 10);
+  //     textSize(24);
+  //     textAlign(CENTER);
+  //     text(this.str, this.buttonX, this.buttonY + 9);
+  //   }
+  //   else
+  //   {
+  //     print("not selected");
+  //     fill(10, 10, 10, 200);
+  //     stroke(0, 100, 150);
+  //     strokeWeight(3);
+  //     rectMode(CENTER);
+  //     rect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight, this.buttonRadius);
+  //
+  //     strokeWeight(0);
+  //     fill(0, 100, 150);
+  //     textSize(24);
+  //     textAlign(CENTER);
+  //     text(this.str, this.buttonX, this.buttonY + 9);
+  //   }
+  //
+  // }
+
+
 
   dismiss()
   {
