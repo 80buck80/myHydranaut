@@ -37,7 +37,7 @@ function World1()
   ];
 
   var player = new Player(node0, player1Piece);
-  var puzzle = new Puzzle();
+  var puzzle = new Puzzle(world1Questions);
   var closeButton = new Button(puzzle.x + puzzle.width/2, puzzle.y + puzzle.height/9*8, "close");
 
   this.draw = function()

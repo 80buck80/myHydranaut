@@ -69,7 +69,7 @@ class Player
 
 class Puzzle
 {
-  constructor()
+  constructor(questions)
   {
     this.currentNode;
     this.x = width/4;
@@ -78,7 +78,7 @@ class Puzzle
     this.height = 300;
     this.radius = 20;
     this.visible = true;
-
+    this.questions = questions;
   }
 
   setPosition(targetNode)
@@ -105,16 +105,25 @@ class Puzzle
       switch(this.currentNode.number)
       {
         case 0:
-              text(world1Questions[0].welcome, this.x + 20, this.y + 25, 700, 300);
+              text(this.questions[0].welcome, this.x + 10, this.y + 25, 700, 300);
               break;
         case 1:
-              text(world1Questions[1].question, this.x + 20, this.y + 25, 700, 300);
+              text(this.questions[1].question, this.x + 10, this.y + 25, 700, 300);
               break;
         case 2:
-              text(world1Questions[2].question, this.x + 20, this.y + 25, 700, 300);
+              text(this.questions[2].question, this.x + 10, this.y + 25, 700, 300);
               break;
         case 3:
-              text(world1Questions[3].question, this.x + 20, this.y + 25, 700, 300);
+              text(this.questions[3].question, this.x + 10, this.y + 25, 700, 300);
+              break;
+        case 4:
+              text(this.questions[4].question, this.x + 10, this.y + 25, 700, 300);
+              break;
+        case 5:
+              text(this.questions[5].question, this.x + 10, this.y + 25, 700, 300);
+              break;
+        case 6:
+              text(this.questions[6].question, this.x + 10, this.y + 25, 700, 300);
               break;
 
       }
@@ -197,10 +206,10 @@ function preload()
     bkImage = loadImage('images/indexBG.jpg');
     hydra = loadImage('images/hydra.png');
     worldsMap = loadImage('images/worldsMap.png');
-    worldMap1 = loadImage('images/full-world.png');
+    worldMap1 = loadImage('images/World1.png');
     player1Piece = loadImage('images/gamePiece.png');//load player piece (434X720)
 
-    //LOAD QUESTIONS FROM JSON FILE
+    //LOAD WORLD QUESTIONS FROM JSON FILE
     world1Questions = loadJSON("world1Questions.json");
 }
 
