@@ -78,11 +78,6 @@ class Puzzle
     this.height = 300;
     this.radius = 20;
     this.visible = true;
-    this.buttonX = this.x + this.width/2;
-    this.buttonY = this.y + this.height/9*8;
-    this.buttonWidth = 80;
-    this.buttonHeight = 25;
-    this.buttonRadius = 5;
 
   }
 
@@ -123,24 +118,6 @@ class Puzzle
               break;
 
       }
-
-
-
-      //BUTTON
-      this.buttonX = this.x + this.width/2;
-      this.buttonY = this.y + this.height/9*8;
-      this.buttonWidth = 80;
-      this.buttonHeight = 25;
-      this.buttonRadius = 5;
-      rectMode(CENTER);
-      rect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight, this.buttonRadius);
-
-      //BUTTON TEXT
-      strokeWeight(0);
-      fill(0, 100, 150)
-      textSize(24);
-      textAlign(CENTER);
-      text('close', this.buttonX, this.buttonY + 7);
     }
   }
 
@@ -150,11 +127,51 @@ class Puzzle
     this.visible = false;
   }
 
+}
+
+class Button
+{
+  constructor(x, y, str)
+  {
+    //BUTTON LOCATION
+    this.buttonX = x;
+    this.buttonY = y;
+
+    //BUTTON SIZE
+    this.buttonWidth = 80;
+    this.buttonHeight = 25;
+    this.buttonRadius = 5;
+
+    //BUTTON TEXT
+    this.str = str;
+
+    //BUTTON VISIBILITY
+    this.visible = true;
+  }
+
+  display()
+  {
+    if(this.visible)
+    {
+      //DRAW BUTTON
+      fill(10, 10, 10, 200);
+      stroke(0, 100, 150);
+      strokeWeight(3);
+      rectMode(CENTER);
+      rect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight, this.buttonRadius);
+
+      //BUTTON TEXT
+      strokeWeight(0);
+      fill(0, 100, 150);
+      textSize(24);
+      textAlign(CENTER);
+      text(this.str, this.buttonX, this.buttonY + 7);
+    }
+  }
+
   //CHECK IF CLICK WAS MADE INSIDE THE BUTTON
   clicked(x, y)
   {
-
-    //let r = dist(x, y, this.buttonX, this.buttonY);
     var dx = abs(x - this.buttonX);
     var dy = abs(y - this.buttonY);
     if(dx <= this.buttonWidth && dy <= this.buttonHeight)
@@ -163,6 +180,11 @@ class Puzzle
     }
   }
 
+  dismiss()
+  {
+    clear();
+    this.visible = false;
+  }
 
 }
 

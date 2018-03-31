@@ -38,6 +38,7 @@ function World1()
 
   var player = new Player(node0, player1Piece);
   var puzzle = new Puzzle();
+  var closeButton = new Button(puzzle.x + puzzle.width/2, puzzle.y + puzzle.height/9*8, "close");
 
   this.draw = function()
   {
@@ -56,6 +57,9 @@ function World1()
     //DISPLAY POP-UP
     puzzle.display(player.currentNode);
 
+    //DISPLAY BUTTON
+    closeButton.display();
+
   }
 
   this.mousePressed = function()
@@ -71,13 +75,15 @@ function World1()
       }
     }
 
-    //CHECK IFBUTTON IN PUZZLE IS CLICKED
-    if(puzzle.clicked(mouseX, mouseY))
+    //CHECK IF CLOSE BUTTON IN PUZZLE IS CLICKED
+    if(closeButton.clicked(mouseX, mouseY))
     {
       puzzle.dismiss();
+      closeButton.dismiss();
     }
   }
 
+  //MOVES THE PLAYER AND SETS POP_UP AND CLOSE BUTTON TO VISIBLE
   this.adjSearch = function(targetNode)
   {
 
@@ -95,6 +101,7 @@ function World1()
         this.currentNode = targetNode;
         puzzle.setPosition(targetNode);
         puzzle.visible = true;
+        closeButton.visible = true;
         clear();
         return;
       }
