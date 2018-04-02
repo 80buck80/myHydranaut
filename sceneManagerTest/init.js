@@ -125,6 +125,18 @@ class Puzzle
         case 6:
               text(this.questions[6].question, this.x + 10, this.y + 25, 700, 300);
               break;
+        case 7:
+              text(this.questions[7].question, this.x + 10, this.y + 25, 700, 300);
+              break;
+        case 8:
+              text(this.questions[8].question, this.x + 10, this.y + 25, 700, 300);
+              break;
+        case 9:
+              text(this.questions[9].question, this.x + 10, this.y + 25, 700, 300);
+              break;
+        case 10:
+              text(this.questions[10].question, this.x + 10, this.y + 25, 700, 300);
+              break;
 
       }
     }
