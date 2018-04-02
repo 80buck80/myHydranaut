@@ -7,6 +7,15 @@ var worldMap1;
 var player1Piece;//temp player token
 var nodeImageArr;
 var world1Questions;
+var planet1;
+var planet2;
+var planet3;
+var planet4;
+var p1;
+var spaceShadows;
+var diamonds;
+var button;
+var dRed,dGreen,dOrange,dBlue,hRed,hBlue;
 
 
 class Node
@@ -39,33 +48,33 @@ class Node
 
 
 //PLAYER CLASS
-class Player
-{
-  constructor(currentNode, player1Piece)
-  {
-    this.x = currentNode.x - 15;
-    this.y = currentNode.y - 50;
-    this.width = 30;
-    this.height = 50;
-    this.piece = player1Piece;
-    this.currentNode = currentNode;
-  }
-
-  display()
-  {
-
-    image(this.piece,this.x, this.y, this.width, this.height);
-  }
-
-  move(targetNode)
-  {
-
-    this.currentNode = targetNode;
-    this.x = targetNode.x - 15;
-    this.y = targetNode.y - 50;
-    this.display();
-  }
-}
+// class Player
+// {
+//   constructor(currentNode, player1Piece)
+//   {
+//     this.x = currentNode.x - 15;
+//     this.y = currentNode.y - 50;
+//     this.width = 30;
+//     this.height = 50;
+//     this.piece = player1Piece;
+//     this.currentNode = currentNode;
+//   }
+//
+//   display()
+//   {
+//
+//     image(this.piece,this.x, this.y, this.width, this.height);
+//   }
+//
+//   move(targetNode)
+//   {
+//
+//     this.currentNode = targetNode;
+//     this.x = targetNode.x - 15;
+//     this.y = targetNode.y - 50;
+//     this.display();
+//   }
+// }
 
 class Puzzle
 {
@@ -103,7 +112,7 @@ class Puzzle
       strokeWeight(0);
       fill(255);
       textSize(24);
-      text(this.questions[this.currentNode.number].question, this.x + 10, this.y + 25, 700, 300);
+      text(this.questions[currentNode].question, this.x + 10, this.y + 25, 700, 300);
     }
   }
 
@@ -260,6 +269,24 @@ function preload()
     worldsMap = loadImage('images/worldsMap.png');
     worldMap1 = loadImage('images/World1.png');
     player1Piece = loadImage('images/gamePiece.png');//load player piece (434X720)
+    spaceShadows = loadImage('images/spaceShadows.png');
+    diamonds = loadImage('images/diamonds1.png');
+
+
+
+    //load all sprites images.
+    p1 = loadAnimation('images/gamePieceSmall.png');//load player piece (48x80)
+    planet1=loadAnimation("images/planet1.png");
+    planet2=loadAnimation("images/planet2.png");
+    planet3=loadAnimation("images/planet3.png");
+    planet4=loadAnimation("images/planet4.png");
+
+    dRed=loadAnimation("images/DR2.png");
+    dGreen=loadAnimation("images/DG2.png");
+    dOrange==loadAnimation("images/DY2.png");
+    dBlue=loadAnimation("images/DB2.png");
+    hRed=loadAnimation("images/R1.png");
+    hBlue=loadAnimation("images/BH1.png");
 
     //LOAD WORLD QUESTIONS FROM JSON FILE
     world1Questions = loadJSON("world1Questions.json");
@@ -283,6 +310,23 @@ function setup()
     mgr.worldMap1 = worldMap1;
     mgr.player1Piece = player1Piece;
 
+    mgr.planet1=planet1;
+    mgr.planet2=planet2;
+    mgr.planet3=planet3;
+    mgr.planet4=planet4;
+
+    mgr.dRed=dRed;
+    mgr.dGreen=dGreen;
+    mgr.dOrange=dOrange;
+    mgr.dBlue=dBlue;
+    mgr.hRed=hRed;
+    mgr.hBlue=hBlue;
+
+    mgr.spaceShadows=spaceShadows;
+    mgr.diamonds = diamonds;
+    mgr.p1=p1;
+
+
     //DONT KNOW WHAT THIS DOES
     mgr.wire();
 
@@ -291,5 +335,5 @@ function setup()
 }
 
 function windowResized() {
-  centerCanvas();
+  // centerCanvas();
 }
