@@ -79,6 +79,7 @@ class Puzzle
     this.radius = 20;
     this.visible = true;
     this.questions = questions;
+    this.answered = false;//has the question been answered correctly?
   }
 
   setPosition(targetNode)
@@ -102,43 +103,7 @@ class Puzzle
       strokeWeight(0);
       fill(255);
       textSize(24);
-      switch(this.currentNode.number)
-      {
-        case 0:
-              text(this.questions[0].welcome, this.x + 10, this.y + 25, 700, 300);
-              break;
-        case 1:
-              text(this.questions[1].question, this.x + 10, this.y + 25, 700, 300);
-              break;
-        case 2:
-              text(this.questions[2].question, this.x + 10, this.y + 25, 700, 300);
-              break;
-        case 3:
-              text(this.questions[3].question, this.x + 10, this.y + 25, 700, 300);
-              break;
-        case 4:
-              text(this.questions[4].question, this.x + 10, this.y + 25, 700, 300);
-              break;
-        case 5:
-              text(this.questions[5].question, this.x + 10, this.y + 25, 700, 300);
-              break;
-        case 6:
-              text(this.questions[6].question, this.x + 10, this.y + 25, 700, 300);
-              break;
-        case 7:
-              text(this.questions[7].question, this.x + 10, this.y + 25, 700, 300);
-              break;
-        case 8:
-              text(this.questions[8].question, this.x + 10, this.y + 25, 700, 300);
-              break;
-        case 9:
-              text(this.questions[9].question, this.x + 10, this.y + 25, 700, 300);
-              break;
-        case 10:
-              text(this.questions[10].question, this.x + 10, this.y + 25, 700, 300);
-              break;
-
-      }
+      text(this.questions[this.currentNode.number].question, this.x + 10, this.y + 25, 700, 300);
     }
   }
 
