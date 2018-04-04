@@ -3,7 +3,7 @@ var gameHeight;
 var bkImage;
 var hydra;
 var worldsMap;
-var worldMap1;
+var worldMap1,worldMap2,worldMap3,worldMap4;
 var player1Piece;//temp player token
 var nodeImageArr;
 var world1Questions;
@@ -15,7 +15,8 @@ var p1;
 var spaceShadows;
 var diamonds;
 var button;
-var dRed,dGreen,dOrange,dBlue,hRed,hBlue;
+var dRed,dGreen,dOrange,dBlue,hRed,hBlue,fontRegular;
+var questionNumber;
 
 
 class Node
@@ -88,7 +89,8 @@ class Puzzle
     this.radius = 20;
     this.visible = true;
     this.questions = questions;
-    this.answered = false;//has the question been answered correctly?
+    this.answered = false;
+    this.first=-1;//has the question been answered correctly?
   }
 
   setPosition(targetNode)
@@ -102,17 +104,37 @@ class Puzzle
 
     if(this.visible)
     {
+
       //POP UP
       fill(10, 10, 10, 200);
       stroke(0, 100, 150);
       strokeWeight(3);
       rect(this.x, this.y, this.width, this.height, this.radius);
+        strokeWeight(0);
+        fill(255);
+        textSize(20);
+        textFont(fontRegular);
+      if(currentNode >19){
+          console.log("tutorial node "+currentNode);
 
+
+          text(this.questions[0].tutorial[currentNode-20], this.x + 10, this.y + 25, 700, 300);
+      }
+     else{
+         // console.log("inside else c");
+         // do
+         //  {
+        //  questionNumber=int(random(1,5));
+        //  console.log("random = " + questionNumber);
+
+
+          //currentNode=questionNumber;
+         // } while(this.questions[questionNumber].asked)
+          //this.answered = true;
+          text(this.questions[currentNode].question, this.x + 10, this.y + 25, 700, 300);
+      }
       //PUZZLE TEXT
-      strokeWeight(0);
-      fill(255);
-      textSize(24);
-      text(this.questions[currentNode].question, this.x + 10, this.y + 25, 700, 300);
+     //return(currentNode);
     }
   }
 
@@ -263,11 +285,18 @@ class Button
 function preload()
 {
 
+    //load font
+    //fontRegular = loadFont('font/VT323-Regular.ttf');
+    fontRegular = loadFont('font/OverpassMono-Regular.ttf');
+    //fontRegular = loadFont('font/Combo-Regular.ttf');
     //load all images
     bkImage = loadImage('images/indexBG.jpg');
     hydra = loadImage('images/hydra.png');
     worldsMap = loadImage('images/worldsMap.png');
     worldMap1 = loadImage('images/World1.png');
+    worldMap2 = loadImage('images/World2.png');
+    worldMap3 = loadImage('images/World3.png');
+    worldMap4 = loadImage('images/World4.png');
     player1Piece = loadImage('images/gamePiece.png');//load player piece (434X720)
     spaceShadows = loadImage('images/spaceShadows.png');
     diamonds = loadImage('images/diamonds1.png');
@@ -308,6 +337,9 @@ function setup()
     mgr.hydra = hydra;
     mgr.worldsMap = worldsMap;
     mgr.worldMap1 = worldMap1;
+    mgr.worldMap2 = worldMap2;
+    mgr.worldMap3 = worldMap3;
+    mgr.worldMap4 = worldMap4;
     mgr.player1Piece = player1Piece;
 
     mgr.planet1=planet1;
@@ -325,7 +357,7 @@ function setup()
     mgr.spaceShadows=spaceShadows;
     mgr.diamonds = diamonds;
     mgr.p1=p1;
-
+    mgr.fontRegular=fontRegular;
 
     //DONT KNOW WHAT THIS DOES
     mgr.wire();
