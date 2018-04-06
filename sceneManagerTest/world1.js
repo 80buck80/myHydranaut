@@ -59,7 +59,7 @@ function World1()
     var xpos=nodesLocation[playstate][0];
     var ypos=nodesLocation[playstate][1];
 
-    puzzle.initializeQuestion(playstate);//tells puzzle what question to display
+    puzzle.initializeQuestion(3);//tells puzzle what question to display
 
     this.draw = function()
     {
@@ -90,47 +90,34 @@ function World1()
 
         checkoverlap();
 
-        //puzzle.display(playstate);
-
         mouseIsPressed=false;
         drawSprites();
+
+        puzzle.display(playstate);
+
+
     }
 
     this.mousePressed = function()
     {
-        //CHECKS IF CLICKED INSIDE A BUTTON
-        // for(i = 0; i < puzzle.buttonArray.length; i++)
-        // {
-        //   if(puzzle.buttonArray[i].clicked(mouseX, mouseY))
-        //   {
-        //     print(puzzle.buttonArray[i].selected);
-        //     puzzle.buttonArray[i].setSelected();
-        //     print(puzzle.buttonArray[i].selected);
-        //
-        //   }
-        // }
-        //if state is at last node reset it. (we can have this to move to next world)
-        // if(playstate == 11 ){
-        //     playstate=0;
-        //     //puzzle.visible = true;
-        // }
-        // else {
-        //playstate++;
-        // }
-        //set new x and y coordinates
-        setxy();
-        //console.log(` mouse x = ${mouseX}  y = ${mouseY} playstate = ${playstate}`);
-        //set new attraction point for player to move to new x and y coordinates
-        movePlayer();
+      
+
+
 
     }
 
     //checks to see if player has reached coordinates and set velocity to 0 so that it can stop moving.
-    function checkoverlap()
-    {
+    function checkoverlap() {
         if (player.overlapPoint(xpos, ypos))
         {
+
+
             player.setVelocity(0, 0);
+
+            //puzzle.display(playstate);
+
+
+
         }
     }
     //make player move to new attraction poing.
@@ -138,8 +125,6 @@ function World1()
     {
         player.attractionPoint(4, xpos, ypos);
 
-        //puzzle.initializeQuestion(playstate);//tells puzzle what question to display
-        //puzzle.visible = true;
         // console.log(`playstate = ${playstate}`);
 
     }
@@ -150,6 +135,14 @@ function World1()
         xpos=nodesLocation[playstate][0];
         ypos=nodesLocation[playstate][1];
 
+    }
+
+    function goToNext()
+    {
+      playstate++;
+      setxy();
+      movePlayer();
+      puzzle.initializeQuestion(playstate);
     }
 
 
