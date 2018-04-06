@@ -79,7 +79,7 @@ class Puzzle
     this.radius = 20;
     this.visible = true;
     this.questions = questions;
-    this.question;//stores the current question
+    this.currentQuestion;//stores the current question
     this.buttonArray = [];//stores adn array of buttons for current question
   }
 
@@ -92,35 +92,10 @@ class Puzzle
   {
     this.currentNode = targetNode;//set new current node
 
-    switch(this.currentNode.number)
-    {
-      case 0:
-            this.question = this.questions[0].welcome;
-            break;
-      case 1:
-            this.question = this.questions[1].question;
-            break;
-      case 2:
-            this.question = this.questions[2].question;
-            break;
-      case 3:
-            this.question = this.questions[3].question;
-            break;
-      case 4:
-            this.question = this.questions[4].question;
-            break;
-      case 5:
-            this.question = this.questions[5].question;
-            break;
-      case 6:
-            this.question = this.questions[6].question;
-            break;
-    }
+    this.currentQuestion = this.questions[this.currentNode.number].question;
 
-
-    buttonArray = [];//clear the button array
+    this.buttonArray = [];//clear the button array
     this.makePuzzleButtons();//fill the button array
-
 
   }
 
@@ -140,12 +115,12 @@ class Puzzle
       strokeWeight(0);
       fill(255);
       textSize(24);
-      text(this.question, this.x + 10, this.y + 25, 700, 300);
+      text(this.currentQuestion, this.x + 10, this.y + 25, 700, 300);
 
       //BUTTONS
-      for(i = 0; i < buttonArray.length; i++)
+      for(i = 0; i < this.buttonArray.length; i++)
       {
-        buttonArray[i].display();
+        this.buttonArray[i].display();
       }
     }
   }
@@ -165,42 +140,42 @@ class Puzzle
     var maxLength;//holds the largest string length of an answer button
 
     //DIVIDE PUZZLE INTO COLUMNS FOR BUTTONS TO SIT IN
-    buttonColumns = puzzle.width/8;
+    buttonColumns = this.width/8;
 
     //PLACE BUTTONS DEPENDING ON IF THERE ARE 0, 2 OR 4 ANSWER OPTIONS
     //MAKE AND STORE BUTTON OBJECTS INTO buttonArr[]
-    switch(questions[nodeNumber].optionNum)
+    switch(this.questions[nodeNumber].optionNum)
     {
       case 0:
             break;
       case 2:
-            strLengthArr.push(questions[nodeNumber].option1.length);
-            strLengthArr.push(questions[nodeNumber].option2.length);
+            strLengthArr.push(this.questions[nodeNumber].option1.length);
+            strLengthArr.push(this.questions[nodeNumber].option2.length);
             maxLength = max(strLengthArr);
-            this.buttonArray.push(new Button(puzzle.x + buttonColumns*3, puzzle.y + puzzle.height/9*8, maxLength, questions[nodeNumber].option1));
-            this.buttonArray.push(new Button(puzzle.x + buttonColumns*5, puzzle.y + puzzle.height/9*8, maxLength, questions[nodeNumber].option2));
+            this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
+            this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
             break;
 
       case 3:
-            strLengthArr.push(questions[nodeNumber].option1.length);
-            strLengthArr.push(questions[nodeNumber].option2.length);
-            strLengthArr.push(questions[nodeNumber].option3.length);
+            strLengthArr.push(this.questions[nodeNumber].option1.length);
+            strLengthArr.push(this.questions[nodeNumber].option2.length);
+            strLengthArr.push(this.questions[nodeNumber].option3.length);
             maxLength = max(strLengthArr);
-            this.buttonArray.push(new Button(puzzle.x + buttonColumns*2, puzzle.y + puzzle.height/9*8, maxLength, questions[nodeNumber].option1));
-            this.buttonArray.push(new Button(puzzle.x + buttonColumns*4, puzzle.y + puzzle.height/9*8, maxLength, questions[nodeNumber].option2));
-            this.buttonArray.push(new Button(puzzle.x + buttonColumns*6, puzzle.y + puzzle.height/9*8, maxLength, questions[nodeNumber].option3));
+            this.buttonArray.push(new Button(this.x + buttonColumns*2, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
+            this.buttonArray.push(new Button(this.x + buttonColumns*4, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
+            this.buttonArray.push(new Button(this.x + buttonColumns*6, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option3));
             break;
 
       case 4:
-            strLengthArr.push(questions[nodeNumber].option1.length);
-            strLengthArr.push(questions[nodeNumber].option2.length);
-            strLengthArr.push(questions[nodeNumber].option3.length);
-            strLengthArr.push(questions[nodeNumber].option4.length);
+            strLengthArr.push(this.questions[nodeNumber].option1.length);
+            strLengthArr.push(this.questions[nodeNumber].option2.length);
+            strLengthArr.push(this.questions[nodeNumber].option3.length);
+            strLengthArr.push(this.questions[nodeNumber].option4.length);
             maxLength = max(strLengthArr);
-            this.buttonArray.push(new Button(puzzle.x + buttonColumns*1, puzzle.y + puzzle.height/9*8, maxLength, questions[nodeNumber].option1));
-            this.buttonArray.push(new Button(puzzle.x + buttonColumns*3, puzzle.y + puzzle.height/9*8, maxLength, questions[nodeNumber].option2));
-            this.buttonArray.push(new Button(puzzle.x + buttonColumns*5, puzzle.y + puzzle.height/9*8, maxLength, questions[nodeNumber].option3));
-            this.buttonArray.push(new Button(puzzle.x + buttonColumns*7, puzzle.y + puzzle.height/9*8, maxLength, questions[nodeNumber].option4));
+            this.buttonArray.push(new Button(this.x + buttonColumns*1, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
+            this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
+            this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option3));
+            this.buttonArray.push(new Button(this.x + buttonColumns*7, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option4));
             break;
     }
   }

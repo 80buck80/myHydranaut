@@ -40,6 +40,8 @@ function World1()
   var puzzle = new Puzzle(world1Questions);
   //var buttonArray = [];
 
+  puzzle.initializeQuestion(player.currentNode);
+
   this.draw = function()
   {
     //DISPLAY BOARD
@@ -78,23 +80,23 @@ function World1()
       //CHECK IF CLICKED INSIDE OF A NODE
       if(nodeArray[i].clicked(mouseX, mouseY))
       {
-        this.adjSearch(nodeArray[i], buttonArray);
+        this.adjSearch(nodeArray[i]);
         return;
       }
     }
 
     //CHECKS IF CLICKED INSIDE A BUTTON
-    // for(i = 0; i < buttonArray.length; i++)
-    // {
-    //   if(buttonArray[i].clicked(mouseX, mouseY))
-    //   {
-    //     buttonArray[i].setSelected();
-    //   }
-    // }
+    for(i = 0; i < puzzle.buttonArray.length; i++)
+    {
+      if(puzzle.buttonArray[i].clicked(mouseX, mouseY))
+      {
+        puzzle.buttonArray[i].setSelected();
+      }
+    }
   }
 
   //MOVES THE PLAYER AND SETS POP-UP AND BUTTONS TO VISIBLE
-  this.adjSearch = function(targetNode, buttonArray)
+  this.adjSearch = function(targetNode)
   {
 
     //TRAVERSE THE ADJACENCY MATRIX AT THE
