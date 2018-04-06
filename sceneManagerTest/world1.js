@@ -59,6 +59,8 @@ function World1()
     var xpos=nodesLocation[playstate][0];
     var ypos=nodesLocation[playstate][1];
 
+    puzzle.initializeQuestion(playstate);//tells puzzle what question to display
+
     this.draw = function()
     {
         //DISPLAY BOARD
@@ -87,6 +89,8 @@ function World1()
         }
 
         checkoverlap();
+
+        puzzle.display();
 
         mouseIsPressed=false;
         drawSprites();
