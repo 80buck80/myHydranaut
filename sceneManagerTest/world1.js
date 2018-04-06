@@ -59,7 +59,7 @@ function World1()
     var xpos=nodesLocation[playstate][0];
     var ypos=nodesLocation[playstate][1];
 
-    puzzle.initializeQuestion(3);//tells puzzle what question to display
+    puzzle.initializeQuestion(playstate);//tells puzzle what question to display
 
     this.draw = function()
     {
@@ -106,6 +106,17 @@ function World1()
         if(puzzle.buttonArray[i].clicked(mouseX, mouseY))
         {
           puzzle.buttonArray[i].setSelected();
+
+          //CHECK IF THE BUTTON CLICKED IS THE NEXT BUTTON
+          //IF YES, REMOVE POP-UP AND MOVE PLAYER TO NEXT NODE
+          if(i == puzzle.buttonArray.length - 1)
+          {
+            puzzle.visible = false;//remove the pop-up
+
+            goToNextNode();//move player to next node
+
+            puzzle.visible = true;//show next puzzle
+          }
         }
       }
 
@@ -138,13 +149,13 @@ function World1()
     //set x and y posing
     function setxy()
     {
-        console.log(`playstate = ${playstate}`);
+        //console.log(`playstate = ${playstate}`);
         xpos=nodesLocation[playstate][0];
         ypos=nodesLocation[playstate][1];
 
     }
 
-    function goToNext()
+    function goToNextNode()
     {
       playstate++;
       setxy();

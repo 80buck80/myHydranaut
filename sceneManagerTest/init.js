@@ -90,6 +90,8 @@ class Puzzle
     this.questions = questions;
     this.currentQuestion;//stores the current question
     this.buttonArray = [];//stores adn array of buttons for current question
+    this.nextButton;
+    this.showNextButton = true;
   }
 
   // setPosition(targetNode)
@@ -105,6 +107,8 @@ class Puzzle
 
     this.buttonArray = [];//clear the button array
     this.makePuzzleButtons();//fill the button array
+    this.nextButton = new Button(this.x + this.width - 50, this.y + this.height - 30, 5, "NEXT");
+    this.buttonArray.push(this.nextButton);
 
   }
 
@@ -132,6 +136,8 @@ class Puzzle
         this.buttonArray[i].display();
       }
     }
+
+
   }
 
   dismiss()
