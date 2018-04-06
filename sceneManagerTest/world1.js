@@ -100,7 +100,14 @@ function World1()
 
     this.mousePressed = function()
     {
-      
+      //CHECKS IF CLICKED INSIDE A BUTTON
+      for(i = 0; i < puzzle.buttonArray.length; i++)
+      {
+        if(puzzle.buttonArray[i].clicked(mouseX, mouseY))
+        {
+          puzzle.buttonArray[i].setSelected();
+        }
+      }
 
 
 
