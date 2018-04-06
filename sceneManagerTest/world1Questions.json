@@ -2,11 +2,7 @@
   [
     {
       "question": "Welcome to the Boolean World",
-<<<<<<< HEAD
       "tutorial1": "NOT Gates are bla bla bla",
-=======
-      "tutorial": "NOT Gates are bla bla bla",
->>>>>>> temp
       "optionNum": 0
     },
     {

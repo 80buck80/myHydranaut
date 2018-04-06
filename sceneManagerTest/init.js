@@ -88,12 +88,8 @@ class Puzzle
     this.radius = 20;
     this.visible = true;
     this.questions = questions;
-<<<<<<< HEAD
-    this.answered = false;//has the question been answered correctly?
-=======
     this.currentQuestion;//stores the current question
     this.buttonArray = [];//stores adn array of buttons for current question
->>>>>>> temp
   }
 
   // setPosition(targetNode)
@@ -128,9 +124,6 @@ class Puzzle
       strokeWeight(0);
       fill(255);
       textSize(24);
-<<<<<<< HEAD
-      text(this.questions[currentNode].question, this.x + 10, this.y + 25, 700, 300);
-=======
       text(this.currentQuestion, this.x + 10, this.y + 25, 700, 300);
 
       //BUTTONS
@@ -138,7 +131,6 @@ class Puzzle
       {
         this.buttonArray[i].display();
       }
->>>>>>> temp
     }
   }
 
