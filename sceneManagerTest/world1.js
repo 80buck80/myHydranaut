@@ -111,13 +111,23 @@ function World1()
         //     //puzzle.visible = true;
         // }
         // else {
-        playstate++;
+        //playstate++;
         // }
         //set new x and y coordinates
         setxy();
         //console.log(` mouse x = ${mouseX}  y = ${mouseY} playstate = ${playstate}`);
         //set new attraction point for player to move to new x and y coordinates
         movePlayer();
+
+        puzzle.visible = true;
+        puzzle.display(playstate);
+        if(puzzle.buttonArray.length !== 0)
+        {
+            for(i = 0; i < puzzle.buttonArray.length; i++)
+            {
+                puzzle.buttonArray[i].display();
+            }
+        }
 
     }
 
@@ -126,23 +136,7 @@ function World1()
     {
         if (player.overlapPoint(xpos, ypos))
         {
-
-
             player.setVelocity(0, 0);
-
-            //SET UP PUZZLE AND DISPLAY IT
-            puzzle.initializeQuestion(playstate);//tells puzzle what question to display
-            puzzle.visible = true;
-            puzzle.display(playstate);
-            if(puzzle.buttonArray.length !== 0)
-            {
-                for(i = 0; i < puzzle.buttonArray.length; i++)
-                {
-                    puzzle.buttonArray[i].display();
-                }
-            }
-
-
         }
     }
     //make player move to new attraction poing.
@@ -159,6 +153,10 @@ function World1()
         console.log(`playstate = ${playstate}`);
         xpos=nodesLocation[playstate][0];
         ypos=nodesLocation[playstate][1];
+
+        //SET UP PUZZLE AND DISPLAY IT
+        puzzle.initializeQuestion(playstate);//tells puzzle what question to display
+
 
     }
 
