@@ -101,7 +101,7 @@ class Puzzle
   {
     this.currentNode = targetNode;//set new current node
 
-    this.currentQuestion = this.questions[this.currentNode.number].question;
+    this.currentQuestion = this.questions[this.currentNode].question;
 
     this.buttonArray = [];//clear the button array
     this.makePuzzleButtons();//fill the button array
@@ -143,7 +143,7 @@ class Puzzle
   //CREATE BUTTONS FOR PUZZLES
   makePuzzleButtons()
   {
-    var nodeNumber = this.currentNode.number;//current node number
+    var nodeNumber = this.currentNode;//current node number
     var buttonColumns;//holds puzzle divisions for buton placement
     var strLengthArr = [];//holds string lengths to be compaired
     var maxLength;//holds the largest string length of an answer button

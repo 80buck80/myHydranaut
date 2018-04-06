@@ -6,7 +6,6 @@ var a;
 var i;
 var imgLoc;
 var dR,dB,dG,puzzle,ans,start;
-var buttonArray;
 
 
 function World1()
@@ -53,15 +52,12 @@ function World1()
     dG.addAnimation("normal",dGreen);
     dG.scale=.3
     dG.mouseActive=true;
-    // puzzle = new Puzzle();
 
-    //var player = new Player(node0, player1Piece);
-    puzzle = new Puzzle(world1Questions);//gives the puzzle class the set of world questions
-    //var closeButton = new Button(puzzle.x + puzzle.width/2, puzzle.y + puzzle.height/9*8, "close");
-    buttonArray = [];
-    ans = 0;
-    xpos=nodesLocation[playstate][0];
-    ypos=nodesLocation[playstate][1];
+    var puzzle = new Puzzle(world1Questions);//gives the puzzle class the set of world questions
+    var buttonArray = [];
+    var ans = 0;
+    var xpos=nodesLocation[playstate][0];
+    var ypos=nodesLocation[playstate][1];
 
     this.draw = function()
     {
@@ -95,10 +91,6 @@ function World1()
         mouseIsPressed=false;
         drawSprites();
     }
-    function Question(){
-
-    }
-
 
     this.mousePressed = function()
     {
@@ -107,8 +99,11 @@ function World1()
         {
           if(puzzle.buttonArray[i].clicked(mouseX, mouseY))
           {
+            print(puzzle.buttonArray[i].selected);
             puzzle.buttonArray[i].setSelected();
+            print(puzzle.buttonArray[i].selected);
           }
+          return;
         }
         //if state is at last node reset it. (we can have this to move to next world)
         // if(playstate == 11 ){
@@ -124,11 +119,6 @@ function World1()
         //set new attraction point for player to move to new x and y coordinates
         movePlayer();
 
-        puzzle.initializeQuestion(targetNode);//tells puzzle what question to display
-        puzzle.visible = true;
-        clear();
-
-
     }
 
     //checks to see if player has reached coordinates and set velocity to 0 so that it can stop moving.
@@ -139,16 +129,16 @@ function World1()
 
 
             player.setVelocity(0, 0);
-            puzzle.visible = true;
-            //DISPLAY BUTTON
-            buttonArray = me.puzzleButtons(puzzle, world1Questions);
 
+            //SET UP PUZZLE AND DISPLAY IT
+            puzzle.initializeQuestion(playstate);//tells puzzle what question to display
+            puzzle.visible = true;
             puzzle.display(playstate);
-            if(buttonArray.length !== 0)
+            if(puzzle.buttonArray.length !== 0)
             {
-                for(i = 0; i < buttonArray.length; i++)
+                for(i = 0; i < puzzle.buttonArray.length; i++)
                 {
-                    buttonArray[i].display();
+                    puzzle.buttonArray[i].display();
                 }
             }
 
