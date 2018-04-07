@@ -3,7 +3,7 @@ var gameHeight;
 var bkImage;
 var hydra;
 var worldsMap;
-var worldMap1,worldMap2,worldMap3,worldMap4;
+var worldMap1;
 var player1Piece;//temp player token
 var nodeImageArr;
 var world1Questions;
@@ -15,8 +15,7 @@ var p1;
 var spaceShadows;
 var diamonds;
 var button;
-var dRed,dGreen,dOrange,dBlue,hRed,hBlue,fontRegular;
-var questionNumber;
+var dRed,dGreen,dOrange,dBlue,hRed,hBlue;
 
 
 class Node
@@ -89,13 +88,28 @@ class Puzzle
     this.radius = 20;
     this.visible = true;
     this.questions = questions;
-    this.answered = false;
-    this.first=-1;//has the question been answered correctly?
+    this.currentQuestion;//stores the current question
+    this.buttonArray = [];//stores adn array of buttons for current question
+    this.nextButton;
+    this.showNextButton = true;
   }
 
-  setPosition(targetNode)
+  // setPosition(targetNode)
+  // {
+  //   this.currentNode = targetNode;
+  // }
+
+  initializeQuestion(targetNode)
   {
-    this.currentNode = targetNode;
+    this.currentNode = targetNode;//set new current node
+
+    this.currentQuestion = this.questions[this.currentNode].question;
+
+    this.buttonArray = [];//clear the button array
+    this.makePuzzleButtons();//fill the button array
+    this.nextButton = new Button(this.x + this.width - 50, this.y + this.height - 30, 5, "NEXT");
+    this.buttonArray.push(this.nextButton);
+
   }
 
   display(currentNode)
@@ -104,38 +118,26 @@ class Puzzle
 
     if(this.visible)
     {
-
       //POP UP
       fill(10, 10, 10, 200);
       stroke(0, 100, 150);
       strokeWeight(3);
       rect(this.x, this.y, this.width, this.height, this.radius);
-        strokeWeight(0);
-        fill(255);
-        textSize(20);
-        textFont(fontRegular);
-      if(currentNode >19){
-          console.log("tutorial node "+currentNode);
 
-
-          text(this.questions[0].tutorial[currentNode-20], this.x + 10, this.y + 25, 700, 300);
-      }
-     else{
-         // console.log("inside else c");
-         // do
-         //  {
-        //  questionNumber=int(random(1,5));
-        //  console.log("random = " + questionNumber);
-
-
-          //currentNode=questionNumber;
-         // } while(this.questions[questionNumber].asked)
-          //this.answered = true;
-          text(this.questions[currentNode].question, this.x + 10, this.y + 25, 700, 300);
-      }
       //PUZZLE TEXT
-     //return(currentNode);
+      strokeWeight(0);
+      fill(255);
+      textSize(24);
+      text(this.currentQuestion, this.x + 10, this.y + 25, 700, 300);
+
+      //BUTTONS
+      for(i = 0; i < this.buttonArray.length; i++)
+      {
+        this.buttonArray[i].display();
+      }
     }
+
+
   }
 
   dismiss()
@@ -144,6 +146,54 @@ class Puzzle
     this.visible = false;
   }
 
+  //CREATE BUTTONS FOR PUZZLES
+  makePuzzleButtons()
+  {
+    var nodeNumber = this.currentNode;//current node number
+    var buttonColumns;//holds puzzle divisions for buton placement
+    var strLengthArr = [];//holds string lengths to be compaired
+    var maxLength;//holds the largest string length of an answer button
+
+    //DIVIDE PUZZLE INTO COLUMNS FOR BUTTONS TO SIT IN
+    buttonColumns = this.width/8;
+
+    //PLACE BUTTONS DEPENDING ON IF THERE ARE 0, 2 OR 4 ANSWER OPTIONS
+    //MAKE AND STORE BUTTON OBJECTS INTO buttonArr[]
+    switch(this.questions[nodeNumber].optionNum)
+    {
+      case 0:
+            break;
+      case 2:
+            strLengthArr.push(this.questions[nodeNumber].option1.length);
+            strLengthArr.push(this.questions[nodeNumber].option2.length);
+            maxLength = max(strLengthArr);
+            this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
+            this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
+            break;
+
+      case 3:
+            strLengthArr.push(this.questions[nodeNumber].option1.length);
+            strLengthArr.push(this.questions[nodeNumber].option2.length);
+            strLengthArr.push(this.questions[nodeNumber].option3.length);
+            maxLength = max(strLengthArr);
+            this.buttonArray.push(new Button(this.x + buttonColumns*2, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
+            this.buttonArray.push(new Button(this.x + buttonColumns*4, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
+            this.buttonArray.push(new Button(this.x + buttonColumns*6, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option3));
+            break;
+
+      case 4:
+            strLengthArr.push(this.questions[nodeNumber].option1.length);
+            strLengthArr.push(this.questions[nodeNumber].option2.length);
+            strLengthArr.push(this.questions[nodeNumber].option3.length);
+            strLengthArr.push(this.questions[nodeNumber].option4.length);
+            maxLength = max(strLengthArr);
+            this.buttonArray.push(new Button(this.x + buttonColumns*1, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
+            this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
+            this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option3));
+            this.buttonArray.push(new Button(this.x + buttonColumns*7, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option4));
+            break;
+    }
+  }
 }
 
 class Button
@@ -173,11 +223,34 @@ class Button
   {
     if(this.visible)
     {
-      //this.setButtonStyle();
-      this.setButtonStyle();
-      rect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight, this.buttonRadius);
-      this.setTextStyle();
-      text(this.str, this.buttonX, this.buttonY + 9);
+      if(this.selected)
+      {
+        fill(0, 100, 150, 200);
+        stroke(0, 100, 150);
+        strokeWeight(3);
+        rectMode(CENTER);
+        rect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight, this.buttonRadius);
+
+        strokeWeight(0);
+        fill(255, 255, 255);
+        textSize(24);
+        textAlign(CENTER);
+        text(this.str, this.buttonX, this.buttonY + 9);
+      }
+      else
+      {
+        fill(10, 10, 10, 200);
+        stroke(0, 100, 150);
+        strokeWeight(3);
+        rectMode(CENTER);
+        rect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight, this.buttonRadius);
+
+        strokeWeight(0);
+        fill(0, 100, 150);
+        textSize(24);
+        textAlign(CENTER);
+        text(this.str, this.buttonX, this.buttonY + 9);
+      }
     }
   }
 
@@ -192,90 +265,22 @@ class Button
     }
   }
 
-  setButtonStyle()
-  {
-    if(this.selected)
-    {
-      fill(0, 100, 150);
-      stroke(0, 100, 150);
-      strokeWeight(3);
-      rectMode(CENTER);
-      //rect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight, this.buttonRadius);
-    }
-    else
-    {
-      fill(10, 10, 10, 200);
-      stroke(0, 100, 150);
-      strokeWeight(3);
-      rectMode(CENTER);
-      //rect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight, this.buttonRadius);
-    }
-  }
-
-  setTextStyle()
-  {
-    if(this.selected)
-    {
-      strokeWeight(0);
-      fill(10, 10, 10);
-      textSize(24);
-      textAlign(CENTER);
-      //text(this.str, this.buttonX, this.buttonY + 9);
-    }
-    else
-    {
-      strokeWeight(0);
-      fill(0, 100, 150);
-      textSize(24);
-      textAlign(CENTER);
-    //  text(this.str, this.buttonX, this.buttonY + 9);
-    }
-  }
-
-
-  //SETS THE STYLE OF THE BUTTON DEPENDING IN IF HAS BEEN SELECTED
-  //DRAWS THE BUTTON AND TEXT TO THE CANVAS
-  // setButtonStyle()
-  // {
-  //   if(this.selected)
-  //   {
-  //     print("selected");
-  //     fill(0, 100, 150);
-  //     stroke(0, 100, 150);
-  //     strokeWeight(3);
-  //     rectMode(CENTER);
-  //     rect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight, this.buttonRadius);
-  //
-  //     strokeWeight(0);
-  //     fill(10, 10, 10);
-  //     textSize(24);
-  //     textAlign(CENTER);
-  //     text(this.str, this.buttonX, this.buttonY + 9);
-  //   }
-  //   else
-  //   {
-  //     print("not selected");
-  //     fill(10, 10, 10, 200);
-  //     stroke(0, 100, 150);
-  //     strokeWeight(3);
-  //     rectMode(CENTER);
-  //     rect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight, this.buttonRadius);
-  //
-  //     strokeWeight(0);
-  //     fill(0, 100, 150);
-  //     textSize(24);
-  //     textAlign(CENTER);
-  //     text(this.str, this.buttonX, this.buttonY + 9);
-  //   }
-  //
-  // }
-
-
-
   dismiss()
   {
     clear();
     this.visible = false;
+  }
+
+  setSelected()
+  {
+    if(this.selected)
+    {
+      this.selected = false;
+    }
+    else
+    {
+      this.selected = true;
+    }
   }
 
 }
@@ -285,18 +290,11 @@ class Button
 function preload()
 {
 
-    //load font
-    //fontRegular = loadFont('font/VT323-Regular.ttf');
-    fontRegular = loadFont('font/OverpassMono-Regular.ttf');
-    //fontRegular = loadFont('font/Combo-Regular.ttf');
     //load all images
     bkImage = loadImage('images/indexBG.jpg');
     hydra = loadImage('images/hydra.png');
     worldsMap = loadImage('images/worldsMap.png');
     worldMap1 = loadImage('images/World1.png');
-    worldMap2 = loadImage('images/World2.png');
-    worldMap3 = loadImage('images/World3.png');
-    worldMap4 = loadImage('images/World4.png');
     player1Piece = loadImage('images/gamePiece.png');//load player piece (434X720)
     spaceShadows = loadImage('images/spaceShadows.png');
     diamonds = loadImage('images/diamonds1.png');
@@ -337,9 +335,6 @@ function setup()
     mgr.hydra = hydra;
     mgr.worldsMap = worldsMap;
     mgr.worldMap1 = worldMap1;
-    mgr.worldMap2 = worldMap2;
-    mgr.worldMap3 = worldMap3;
-    mgr.worldMap4 = worldMap4;
     mgr.player1Piece = player1Piece;
 
     mgr.planet1=planet1;
@@ -357,7 +352,7 @@ function setup()
     mgr.spaceShadows=spaceShadows;
     mgr.diamonds = diamonds;
     mgr.p1=p1;
-    mgr.fontRegular=fontRegular;
+
 
     //DONT KNOW WHAT THIS DOES
     mgr.wire();
