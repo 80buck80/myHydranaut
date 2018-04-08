@@ -75,22 +75,85 @@ class Puzzle
   {
      // console.log("ininalize question = "+targetNode);
    // this.currentNode = targetNode;//set new current node
+      var b;
       if(targetNode > 19) {
           this.currentNode = targetNode;//set new current node
 
           console.log("initialize tutorial = "+ this.currentNode);
           this.currentQuestion = this.questions[0].tutorial[targetNode-20];
+          b = 0;
       }
 
       else{
           console.log("initialize question = "+targetNode);
           this.currentNode = targetNode;
-          this.currentQuestion = this.questions[this.currentNode].question;}
+          this.currentQuestion = this.questions[this.currentNode].question;
+      b = this.questions[this.currentNode].optionNum;}
          // this.currentNode = targetNode;}
     this.buttonArray = [];//clear the button array
     this.makePuzzleButtons();//fill the button array
     this.nextButton = new Button(this.x + this.width - 50, this.y + this.height - 30, 5, "NEXT");
     this.buttonArray.push(this.nextButton);
+
+      var nodeNumber = this.currentNode;//current node number
+      var buttonColumns;//holds puzzle divisions for buton placement
+      var strLengthArr = [];//holds string lengths to be compaired
+      var maxLength;//holds the largest string length of an answer button
+
+      console.log("Make puzzle = "+ this.currentNode);
+      //DIVIDE PUZZLE INTO COLUMNS FOR BUTTONS TO SIT IN
+      buttonColumns = this.width/8;
+
+
+
+      //PLACE BUTTONS DEPENDING ON IF THERE ARE 0, 2 OR 4 ANSWER OPTIONS
+      //MAKE AND STORE BUTTON OBJECTS INTO buttonArr[]
+      var n;
+      if(this.currentNode >19){
+          n = 0;
+      }
+      else
+          n = this.questions[nodeNumber].optionNum;
+
+
+      switch(n)
+      {
+          case 0:
+              break;
+          case 2:
+              strLengthArr.push(this.questions[nodeNumber].option1.length);
+              strLengthArr.push(this.questions[nodeNumber].option2.length);
+              maxLength = max(strLengthArr);
+              this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
+              this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
+              break;
+
+          case 3:
+              strLengthArr.push(this.questions[nodeNumber].option1.length);
+              strLengthArr.push(this.questions[nodeNumber].option2.length);
+              strLengthArr.push(this.questions[nodeNumber].option3.length);
+              maxLength = max(strLengthArr);
+              this.buttonArray.push(new Button(this.x + buttonColumns*2, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
+              this.buttonArray.push(new Button(this.x + buttonColumns*4, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
+              this.buttonArray.push(new Button(this.x + buttonColumns*6, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option3));
+              break;
+
+          case 4:
+              strLengthArr.push(this.questions[nodeNumber].option1.length);
+              strLengthArr.push(this.questions[nodeNumber].option2.length);
+              strLengthArr.push(this.questions[nodeNumber].option3.length);
+              strLengthArr.push(this.questions[nodeNumber].option4.length);
+              maxLength = max(strLengthArr);
+              this.buttonArray.push(new Button(this.x + buttonColumns*1, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
+              this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
+              this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option3));
+              this.buttonArray.push(new Button(this.x + buttonColumns*7, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option4));
+              break;
+          default:
+              break;
+      }
+
+
 
   }
 
@@ -125,6 +188,7 @@ class Puzzle
       //BUTTONS
       for(i = 0; i < this.buttonArray.length; i++)
       {
+          //console.log("inside display "+ this.buttonArray.length);
         this.buttonArray[i].display();
       }
     }
@@ -162,42 +226,43 @@ class Puzzle
       n = this.questions[nodeNumber].optionNum;
 
 
-    switch(n)
-    {
-      case 0:
-            break;
-      case 2:
-            strLengthArr.push(this.questions[nodeNumber].option1.length);
-            strLengthArr.push(this.questions[nodeNumber].option2.length);
-            maxLength = max(strLengthArr);
-            this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
-            this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
-            break;
 
-      case 3:
-            strLengthArr.push(this.questions[nodeNumber].option1.length);
-            strLengthArr.push(this.questions[nodeNumber].option2.length);
-            strLengthArr.push(this.questions[nodeNumber].option3.length);
-            maxLength = max(strLengthArr);
-            this.buttonArray.push(new Button(this.x + buttonColumns*2, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
-            this.buttonArray.push(new Button(this.x + buttonColumns*4, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
-            this.buttonArray.push(new Button(this.x + buttonColumns*6, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option3));
-            break;
-
-      case 4:
-            strLengthArr.push(this.questions[nodeNumber].option1.length);
-            strLengthArr.push(this.questions[nodeNumber].option2.length);
-            strLengthArr.push(this.questions[nodeNumber].option3.length);
-            strLengthArr.push(this.questions[nodeNumber].option4.length);
-            maxLength = max(strLengthArr);
-            this.buttonArray.push(new Button(this.x + buttonColumns*1, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
-            this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
-            this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option3));
-            this.buttonArray.push(new Button(this.x + buttonColumns*7, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option4));
-            break;
-        default:
-            break;
-    }
+    // switch(n)
+    // {
+    //   case 0:
+    //         break;
+    //   case 2:
+    //         strLengthArr.push(this.questions[nodeNumber].option1.length);
+    //         strLengthArr.push(this.questions[nodeNumber].option2.length);
+    //         maxLength = max(strLengthArr);
+    //         this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
+    //         this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
+    //         break;
+    //
+    //   case 3:
+    //         strLengthArr.push(this.questions[nodeNumber].option1.length);
+    //         strLengthArr.push(this.questions[nodeNumber].option2.length);
+    //         strLengthArr.push(this.questions[nodeNumber].option3.length);
+    //         maxLength = max(strLengthArr);
+    //         this.buttonArray.push(new Button(this.x + buttonColumns*2, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
+    //         this.buttonArray.push(new Button(this.x + buttonColumns*4, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
+    //         this.buttonArray.push(new Button(this.x + buttonColumns*6, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option3));
+    //         break;
+    //
+    //   case 4:
+    //         strLengthArr.push(this.questions[nodeNumber].option1.length);
+    //         strLengthArr.push(this.questions[nodeNumber].option2.length);
+    //         strLengthArr.push(this.questions[nodeNumber].option3.length);
+    //         strLengthArr.push(this.questions[nodeNumber].option4.length);
+    //         maxLength = max(strLengthArr);
+    //         this.buttonArray.push(new Button(this.x + buttonColumns*1, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
+    //         this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
+    //         this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option3));
+    //         this.buttonArray.push(new Button(this.x + buttonColumns*7, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option4));
+    //         break;
+    //     default:
+    //         break;
+    // }
   }
 }
 

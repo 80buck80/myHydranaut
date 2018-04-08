@@ -77,6 +77,7 @@ function World1()
       //CHECKS IF CLICKED INSIDE A BUTTON
       for(i = 0; i < puzzle.buttonArray.length; i++)
       {
+          console.log("button array size is" +puzzle.buttonArray.length );
         if(puzzle.buttonArray[i].clicked(mouseX, mouseY))
         {
           puzzle.buttonArray[i].setSelected();
