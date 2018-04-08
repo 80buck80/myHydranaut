@@ -10,8 +10,7 @@
       "optionNum": 0
     },
     {
-      "question": "To buy water you need a blue diamond.\nIs this a blue Diamond?",
-     "question1": "Going on the space adventure requires that your spaceship is NOT broken. After an inspection of the ship you find that you ship’s rockets are not working. Will you be able to go on the space adventure?\n            ____\n Select the Blue Diamond",
+     "question": "Going on the space adventure requires that your spaceship is NOT broken. After an inspection of the ship you find that you ship’s rockets are not working. Will you be able to go on the space adventure?\n            ____\n Select the Blue Diamond",
      "optionNum": 2,
      "option1": "Yes",
      "option2": "No",

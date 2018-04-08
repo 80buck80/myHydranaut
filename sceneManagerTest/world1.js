@@ -1,27 +1,31 @@
-var player,firstplayer;
+var player;
 //var map;
 var xpos , ypos;
-var playstate;
+var playstate,questionState;
 var a;
 var i;
 var imgLoc;
-var dR,dB,dG,puzzle,ans,start;
 
 
 function World1()
 {
     var nodesLocation = [
-        [200,423],
-        [250,330],
-        [290,229],
-        [338,137],
-        [599,155],
-        [579,263],
-        [570,395],
-        [905,375],
-        [860,225],
-        [837,130],
-        [960,125]
+        [200,423,20],
+        [200,423,21],
+        [200,423,1],
+        [250,330,2],
+        [290,229,22],
+        [290,229,3],
+        [338,137,4],
+        [599,155,5],
+        [579,263,23],
+        [579,263,6],
+        [570,395,7],
+        [905,375,24],
+        [905,375,8],
+        [860,225,9],
+        [837,130,10],
+        [960,125,11]
     ];
 
     var me = this;
@@ -39,61 +43,31 @@ function World1()
     player.velocity.x = 0;
 
 
-    dR=createSprite((width/2)-200,600);
-    dR.addAnimation("normal",dRed);
-    dR.scale=.3
-    dR.mouseActive=true;
-    dB=createSprite((width/2),600);
-    dB.addAnimation("normal",dBlue);
-    dB.scale=.3
-    dB.mouseActive=true;
-
-    dG=createSprite((width/2)+200,600);
-    dG.addAnimation("normal",dGreen);
-    dG.scale=.3
-    dG.mouseActive=true;
-
     var puzzle = new Puzzle(world1Questions);//gives the puzzle class the set of world questions
     var buttonArray = [];
     var ans = 0;
-    var xpos=nodesLocation[playstate][0];
-    var ypos=nodesLocation[playstate][1];
-
-    puzzle.initializeQuestion(playstate);//tells puzzle what question to display
+    console.log("init"+nodesLocation[playstate][2]);
+    xpos=nodesLocation[playstate][0];
+    ypos=nodesLocation[playstate][1];
+    puzzle.initializeQuestion(nodesLocation[playstate][2]);
+    //puzzle.initializeQuestion(nodesLocation[playstate+20][2]);//tells puzzle what question to display
 
     this.draw = function()
     {
         //DISPLAY BOARD
         image(this.sceneManager.worldMap1, 0, 0, width, height);
-        if(playstate == 11 ){
+        if(playstate == 15 ){
             playstate=0;
             //puzzle.visible = true;
         }
 
 
-        if(dR.mouseIsOver && mouseIsPressed){
-        //if(dR.onMousePressed){
-            console.log("dR mouse");
-            dR.visible=false;
-            ans = 3;
-        }
-        if(dB.mouseIsOver && mouseIsPressed){
-            console.log("dB mouse");
-            dB.visible=false;
-            ans=1;
-
-        }
-        if(dG.mouseIsOver && mouseIsPressed){
-            console.log("dG mouse");
-            dG.visible=false;
-        }
-
         checkoverlap();
 
         mouseIsPressed=false;
         drawSprites();
-
-        puzzle.display(playstate);
+        //console.log("playstate= "+playstate);
+        puzzle.display(nodesLocation[playstate][2]);
 
 
     }
@@ -116,9 +90,11 @@ function World1()
             goToNextNode();//move player to next node
 
             puzzle.visible = true;//show next puzzle
+              break;
           }
         }
       }
+
 
 
 
@@ -128,27 +104,21 @@ function World1()
     function checkoverlap() {
         if (player.overlapPoint(xpos, ypos))
         {
-
-
+            console.log("checkoverlap = "+playstate);
             player.setVelocity(0, 0);
-
-            //puzzle.display(playstate);
-
-
-
         }
     }
     //make player move to new attraction poing.
     function movePlayer()
     {
+        console.log("xpos = "+xpos +"ypos = "+ypos);
         player.attractionPoint(4, xpos, ypos);
-
-        // console.log(`playstate = ${playstate}`);
 
     }
     //set x and y posing
     function setxy()
     {
+        console.log(" playstate = " + playstate+ "xpos = "+nodesLocation[playstate-1][0] + "ypos = "+ nodesLocation[playstate-1][1] );
         //console.log(`playstate = ${playstate}`);
         xpos=nodesLocation[playstate][0];
         ypos=nodesLocation[playstate][1];
@@ -160,12 +130,6 @@ function World1()
       playstate++;
       setxy();
       movePlayer();
-      puzzle.initializeQuestion(playstate);
+      puzzle.initializeQuestion(nodesLocation[playstate][2]);
     }
-
-
-
-
-
-
 }

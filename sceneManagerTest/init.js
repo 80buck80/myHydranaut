@@ -47,34 +47,6 @@ class Node
 }
 
 
-//PLAYER CLASS
-// class Player
-// {
-//   constructor(currentNode, player1Piece)
-//   {
-//     this.x = currentNode.x - 15;
-//     this.y = currentNode.y - 50;
-//     this.width = 30;
-//     this.height = 50;
-//     this.piece = player1Piece;
-//     this.currentNode = currentNode;
-//   }
-//
-//   display()
-//   {
-//
-//     image(this.piece,this.x, this.y, this.width, this.height);
-//   }
-//
-//   move(targetNode)
-//   {
-//
-//     this.currentNode = targetNode;
-//     this.x = targetNode.x - 15;
-//     this.y = targetNode.y - 50;
-//     this.display();
-//   }
-// }
 
 class Puzzle
 {
@@ -101,10 +73,20 @@ class Puzzle
 
   initializeQuestion(targetNode)
   {
-    this.currentNode = targetNode;//set new current node
+     // console.log("ininalize question = "+targetNode);
+   // this.currentNode = targetNode;//set new current node
+      if(targetNode > 19) {
+          this.currentNode = targetNode;//set new current node
 
-    this.currentQuestion = this.questions[this.currentNode].question;
+          console.log("initialize tutorial = "+ this.currentNode);
+          this.currentQuestion = this.questions[0].tutorial[targetNode-20];
+      }
 
+      else{
+          console.log("initialize question = "+targetNode);
+          this.currentNode = targetNode;
+          this.currentQuestion = this.questions[this.currentNode].question;}
+         // this.currentNode = targetNode;}
     this.buttonArray = [];//clear the button array
     this.makePuzzleButtons();//fill the button array
     this.nextButton = new Button(this.x + this.width - 50, this.y + this.height - 30, 5, "NEXT");
@@ -114,7 +96,17 @@ class Puzzle
 
   display(currentNode)
   {
-    this.currentNode = currentNode;
+      if(this.currentNode > 19) {
+          this.currentNode = currentNode;//set new current node
+
+         // console.log("initializequestion = "+ this.currentNode);
+        //  this.currentQuestion = this.questions[0].tutorial[targetNode-20];
+      }
+      else{
+          //this.currentQuestion = this.questions[this.currentNode].question;
+          this.currentNode = currentNode-20;}
+
+    //this.currentNode = currentNode;
 
     if(this.visible)
     {
@@ -154,12 +146,23 @@ class Puzzle
     var strLengthArr = [];//holds string lengths to be compaired
     var maxLength;//holds the largest string length of an answer button
 
+      console.log("Make puzzle = "+ this.currentNode);
     //DIVIDE PUZZLE INTO COLUMNS FOR BUTTONS TO SIT IN
     buttonColumns = this.width/8;
 
+
+
     //PLACE BUTTONS DEPENDING ON IF THERE ARE 0, 2 OR 4 ANSWER OPTIONS
     //MAKE AND STORE BUTTON OBJECTS INTO buttonArr[]
-    switch(this.questions[nodeNumber].optionNum)
+      var n;
+    if(this.currentNode >19){
+        n = 0;
+    }
+    else
+      n = this.questions[nodeNumber].optionNum;
+
+
+    switch(n)
     {
       case 0:
             break;
@@ -191,6 +194,8 @@ class Puzzle
             this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
             this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option3));
             this.buttonArray.push(new Button(this.x + buttonColumns*7, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option4));
+            break;
+        default:
             break;
     }
   }
