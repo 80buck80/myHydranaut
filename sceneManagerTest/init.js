@@ -63,32 +63,30 @@ class Puzzle
     this.currentQuestion;//stores the current question
     this.buttonArray = [];//stores adn array of buttons for current question
     this.nextButton;
+    this.answer=[];
     this.showNextButton = true;
   }
-
-  // setPosition(targetNode)
-  // {
-  //   this.currentNode = targetNode;
-  // }
 
   initializeQuestion(targetNode)
   {
      // console.log("ininalize question = "+targetNode);
    // this.currentNode = targetNode;//set new current node
-      var b;
+
+      var n;
       if(targetNode > 19) {
           this.currentNode = targetNode;//set new current node
 
           console.log("initialize tutorial = "+ this.currentNode);
           this.currentQuestion = this.questions[0].tutorial[targetNode-20];
-          b = 0;
+          n = 0;
       }
 
       else{
           console.log("initialize question = "+targetNode);
           this.currentNode = targetNode;
           this.currentQuestion = this.questions[this.currentNode].question;
-      b = this.questions[this.currentNode].optionNum;}
+      n = this.questions[this.currentNode].optionNum;
+      }
          // this.currentNode = targetNode;}
     this.buttonArray = [];//clear the button array
     this.makePuzzleButtons();//fill the button array
@@ -108,13 +106,6 @@ class Puzzle
 
       //PLACE BUTTONS DEPENDING ON IF THERE ARE 0, 2 OR 4 ANSWER OPTIONS
       //MAKE AND STORE BUTTON OBJECTS INTO buttonArr[]
-      var n;
-      if(this.currentNode >19){
-          n = 0;
-      }
-      else
-          n = this.questions[nodeNumber].optionNum;
-
 
       switch(n)
       {
@@ -126,6 +117,7 @@ class Puzzle
               maxLength = max(strLengthArr);
               this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
               this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
+              this.answer.push(this.questions[nodeNumber].answer);
               break;
 
           case 3:
@@ -136,6 +128,8 @@ class Puzzle
               this.buttonArray.push(new Button(this.x + buttonColumns*2, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
               this.buttonArray.push(new Button(this.x + buttonColumns*4, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
               this.buttonArray.push(new Button(this.x + buttonColumns*6, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option3));
+              this.answer.push(this.questions[nodeNumber].answer1);
+              this.answer.push(this.questions[nodeNumber].answer2);
               break;
 
           case 4:
@@ -148,6 +142,8 @@ class Puzzle
               this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
               this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option3));
               this.buttonArray.push(new Button(this.x + buttonColumns*7, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option4));
+              this.answer.push(this.questions[nodeNumber].answer1);
+              this.answer.push(this.questions[nodeNumber].answer2);
               break;
           default:
               break;
@@ -162,14 +158,10 @@ class Puzzle
       if(this.currentNode > 19) {
           this.currentNode = currentNode;//set new current node
 
-         // console.log("initializequestion = "+ this.currentNode);
-        //  this.currentQuestion = this.questions[0].tutorial[targetNode-20];
       }
       else{
-          //this.currentQuestion = this.questions[this.currentNode].question;
-          this.currentNode = currentNode-20;}
 
-    //this.currentNode = currentNode;
+          this.currentNode = currentNode-20;}
 
     if(this.visible)
     {
@@ -202,6 +194,16 @@ class Puzzle
     this.visible = false;
   }
 
+  checkanswer(c){
+      var b = false;
+      this.answer.forEach(function(answer){
+          if(c==answer){
+              console.log("correct answer = " + answer);
+              b = true;
+          }
+      });
+      return b;
+  }
   //CREATE BUTTONS FOR PUZZLES
   makePuzzleButtons()
   {
@@ -334,6 +336,7 @@ class Button
       return true;
     }
   }
+
 
   dismiss()
   {

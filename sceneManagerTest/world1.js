@@ -25,7 +25,7 @@ function World1()
         [905,375,8],
         [860,225,9],
         [837,130,10],
-        [960,125,11]
+        [960,130,11]
     ];
 
     var me = this;
@@ -66,7 +66,7 @@ function World1()
 
         mouseIsPressed=false;
         drawSprites();
-        //console.log("playstate= "+playstate);
+
         puzzle.display(nodesLocation[playstate][2]);
 
 
@@ -77,29 +77,34 @@ function World1()
       //CHECKS IF CLICKED INSIDE A BUTTON
       for(i = 0; i < puzzle.buttonArray.length; i++)
       {
-          console.log("button array size is" +puzzle.buttonArray.length );
         if(puzzle.buttonArray[i].clicked(mouseX, mouseY))
         {
           puzzle.buttonArray[i].setSelected();
 
+          console.log("butttonlength = "+puzzle.buttonArray.length +" i = "+i);
           //CHECK IF THE BUTTON CLICKED IS THE NEXT BUTTON
           //IF YES, REMOVE POP-UP AND MOVE PLAYER TO NEXT NODE
           if(i == puzzle.buttonArray.length - 1)
           {
             puzzle.visible = false;//remove the pop-up
-
+              //console.log("if"+puzzle.checkanswer(puzzle.buttonArray[i][3]));
             goToNextNode();//move player to next node
 
             puzzle.visible = true;//show next puzzle
               break;
           }
+          else{
+              if(puzzle.checkanswer(puzzle.buttonArray[i].str)){
+                  puzzle.visible = false;//remove the pop-up
+                  //console.log("if"+puzzle.checkanswer(puzzle.buttonArray[i][3]));
+                  goToNextNode();//move player to next node
+                  puzzle.visible = true;//show next puzzle
+              }
+          }
         }
       }
-
-
-
-
     }
+
 
     //checks to see if player has reached coordinates and set velocity to 0 so that it can stop moving.
     function checkoverlap() {
@@ -112,15 +117,15 @@ function World1()
     //make player move to new attraction poing.
     function movePlayer()
     {
-        console.log("xpos = "+xpos +"ypos = "+ypos);
+
         player.attractionPoint(4, xpos, ypos);
 
     }
     //set x and y posing
     function setxy()
     {
-        console.log(" playstate = " + playstate+ "xpos = "+nodesLocation[playstate-1][0] + "ypos = "+ nodesLocation[playstate-1][1] );
-        //console.log(`playstate = ${playstate}`);
+       // console.log(" playstate = " + playstate+ "xpos = "+nodesLocation[playstate-1][0] + "ypos = "+ nodesLocation[playstate-1][1] );
+
         xpos=nodesLocation[playstate][0];
         ypos=nodesLocation[playstate][1];
 
