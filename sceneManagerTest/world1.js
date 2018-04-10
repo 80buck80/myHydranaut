@@ -91,7 +91,7 @@ function World1()
             goToNextNode();//move player to next node
 
             puzzle.visible = true;//show next puzzle
-              break;
+            break;
           }
           else{
               if(puzzle.checkanswer(puzzle.buttonArray[i].str)){
