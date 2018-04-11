@@ -42,10 +42,12 @@ function World1()
         changeColor();
 
         mouseIsPressed=false;
+        drawSprites();
+
         //display question.
         puzzle.display(nodesLocation[playstate][2]);
 
-        drawSprites();
+
 
 
     }
@@ -140,6 +142,7 @@ function World1()
     function checkoverlap() {
         if (player.overlapPoint(xpos, ypos))
         {
+            puzzle.depth = -2;
             puzzle.visible = true;//show next puzzle
             player.setVelocity(0, 0);
         }
@@ -153,8 +156,8 @@ function World1()
 //set x and y posing
     function setxy()
     {
-        player.position.x = nodesLocation[playstate-1][0];
-        player.position.y = nodesLocation[playstate-1][1];
+        // player.position.x = nodesLocation[playstate-1][0];
+        // player.position.y = nodesLocation[playstate-1][1];
         xpos=nodesLocation[playstate][0];
         ypos=nodesLocation[playstate][1];
 

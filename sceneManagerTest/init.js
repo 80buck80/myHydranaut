@@ -56,7 +56,7 @@ class Puzzle
     this.x = width/4;
     this.y = height/4;
     this.width = 700;
-    this.height = 300;
+    this.height = 325;
     this.radius = 20;
     this.visible = true;
     this.questions = questions;
@@ -115,9 +115,9 @@ class Puzzle
               strLengthArr.push(this.questions[nodeNumber].option2.length);
               maxLength = max(strLengthArr);
               this.answer = [];
-              this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
-              this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
-              this.nextButton = new Button(this.x + this.width - 60, this.y + this.height - 30, 7, "SUBMIT");
+              this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8 - 30, maxLength, this.questions[nodeNumber].option1));
+              this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8 - 30, maxLength, this.questions[nodeNumber].option2));
+              this.nextButton = new Button(this.x + this.width/2, this.y + this.height - 25, 7, "SUBMIT");
               this.buttonArray.push(this.nextButton);
               this.answer.push(this.questions[nodeNumber].answer);
 
@@ -128,10 +128,10 @@ class Puzzle
               strLengthArr.push(this.questions[nodeNumber].option2.length);
               strLengthArr.push(this.questions[nodeNumber].option3.length);
               maxLength = max(strLengthArr);
-              this.buttonArray.push(new Button(this.x + buttonColumns*2, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
-              this.buttonArray.push(new Button(this.x + buttonColumns*4, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
-              this.buttonArray.push(new Button(this.x + buttonColumns*6, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option3));
-              this.nextButton = new Button(this.x + this.width - 50, this.y + this.height - 30, 7, "SUBMIT");
+              this.buttonArray.push(new Button(this.x + buttonColumns*2, this.y + this.height/9*8 - 30, maxLength, this.questions[nodeNumber].option1));
+              this.buttonArray.push(new Button(this.x + buttonColumns*4, this.y + this.height/9*8 - 30, maxLength, this.questions[nodeNumber].option2));
+              this.buttonArray.push(new Button(this.x + buttonColumns*6, this.y + this.height/9*8 - 30, maxLength, this.questions[nodeNumber].option3));
+              this.nextButton = new Button(this.x + this.width/2, this.y + this.height - 25, 7, "SUBMIT");
               this.buttonArray.push(this.nextButton);
               this.answer = [];
               this.answer.push(this.questions[nodeNumber].answer1);
@@ -144,11 +144,11 @@ class Puzzle
               strLengthArr.push(this.questions[nodeNumber].option3.length);
               strLengthArr.push(this.questions[nodeNumber].option4.length);
               maxLength = max(strLengthArr);
-              this.buttonArray.push(new Button(this.x + buttonColumns*1, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
-              this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
-              this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option3));
-              this.buttonArray.push(new Button(this.x + buttonColumns*7, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option4));
-              this.nextButton = new Button(this.x + this.width - 50, this.y + this.height - 30, 7, "SUBMIT");
+              this.buttonArray.push(new Button(this.x + buttonColumns*1, this.y + this.height/9*8 - 30, maxLength, this.questions[nodeNumber].option1));
+              this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8 - 30, maxLength, this.questions[nodeNumber].option2));
+              this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8 - 30, maxLength, this.questions[nodeNumber].option3));
+              this.buttonArray.push(new Button(this.x + buttonColumns*7, this.y + this.height/9*8 - 30, maxLength, this.questions[nodeNumber].option4));
+              this.nextButton = new Button(this.x + this.width/2, this.y + this.height - 25, 7, "SUBMIT");
               this.buttonArray.push(this.nextButton);
               this.answer = [];
               this.answer.push(this.questions[nodeNumber].answer1);
@@ -235,45 +235,6 @@ class Puzzle
     }
     else
       n = this.questions[nodeNumber].optionNum;
-
-
-
-    // switch(n)
-    // {
-    //   case 0:
-    //         break;
-    //   case 2:
-    //         strLengthArr.push(this.questions[nodeNumber].option1.length);
-    //         strLengthArr.push(this.questions[nodeNumber].option2.length);
-    //         maxLength = max(strLengthArr);
-    //         this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
-    //         this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
-    //         break;
-    //
-    //   case 3:
-    //         strLengthArr.push(this.questions[nodeNumber].option1.length);
-    //         strLengthArr.push(this.questions[nodeNumber].option2.length);
-    //         strLengthArr.push(this.questions[nodeNumber].option3.length);
-    //         maxLength = max(strLengthArr);
-    //         this.buttonArray.push(new Button(this.x + buttonColumns*2, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
-    //         this.buttonArray.push(new Button(this.x + buttonColumns*4, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
-    //         this.buttonArray.push(new Button(this.x + buttonColumns*6, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option3));
-    //         break;
-    //
-    //   case 4:
-    //         strLengthArr.push(this.questions[nodeNumber].option1.length);
-    //         strLengthArr.push(this.questions[nodeNumber].option2.length);
-    //         strLengthArr.push(this.questions[nodeNumber].option3.length);
-    //         strLengthArr.push(this.questions[nodeNumber].option4.length);
-    //         maxLength = max(strLengthArr);
-    //         this.buttonArray.push(new Button(this.x + buttonColumns*1, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
-    //         this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
-    //         this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option3));
-    //         this.buttonArray.push(new Button(this.x + buttonColumns*7, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option4));
-    //         break;
-    //     default:
-    //         break;
-    // }
   }
 }
 
