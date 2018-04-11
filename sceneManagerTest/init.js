@@ -65,13 +65,11 @@ class Puzzle
     this.nextButton;
     this.answer=[];
     this.showNextButton = true;
+    this.correct = false;
   }
 
   initializeQuestion(targetNode)
   {
-     // console.log("ininalize question = "+targetNode);
-   // this.currentNode = targetNode;//set new current node
-
       var n;
       if(targetNode > 19) {
           this.currentNode = targetNode;//set new current node
@@ -87,9 +85,9 @@ class Puzzle
           this.currentQuestion = this.questions[this.currentNode].question;
       n = this.questions[this.currentNode].optionNum;
       }
-         // this.currentNode = targetNode;}
     this.buttonArray = [];//clear the button array
     this.makePuzzleButtons();//fill the button array
+      //push the next button
     this.nextButton = new Button(this.x + this.width - 50, this.y + this.height - 30, 5, "NEXT");
     this.buttonArray.push(this.nextButton);
 
@@ -106,7 +104,7 @@ class Puzzle
 
       //PLACE BUTTONS DEPENDING ON IF THERE ARE 0, 2 OR 4 ANSWER OPTIONS
       //MAKE AND STORE BUTTON OBJECTS INTO buttonArr[]
-
+      //push answer to asnwer array
       switch(n)
       {
           case 0:
@@ -115,6 +113,7 @@ class Puzzle
               strLengthArr.push(this.questions[nodeNumber].option1.length);
               strLengthArr.push(this.questions[nodeNumber].option2.length);
               maxLength = max(strLengthArr);
+              this.answer = [];
               this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
               this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
               this.answer.push(this.questions[nodeNumber].answer);
@@ -128,6 +127,7 @@ class Puzzle
               this.buttonArray.push(new Button(this.x + buttonColumns*2, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
               this.buttonArray.push(new Button(this.x + buttonColumns*4, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
               this.buttonArray.push(new Button(this.x + buttonColumns*6, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option3));
+              this.answer = [];
               this.answer.push(this.questions[nodeNumber].answer1);
               this.answer.push(this.questions[nodeNumber].answer2);
               break;
@@ -142,6 +142,7 @@ class Puzzle
               this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
               this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option3));
               this.buttonArray.push(new Button(this.x + buttonColumns*7, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option4));
+              this.answer = [];
               this.answer.push(this.questions[nodeNumber].answer1);
               this.answer.push(this.questions[nodeNumber].answer2);
               break;
@@ -193,12 +194,14 @@ class Puzzle
     clear();
     this.visible = false;
   }
-
+//c = chosen string - check if answer match answer array
   checkanswer(c){
       var b = false;
+      console.log("CHECK ANSWER passed  " + c);
       this.answer.forEach(function(answer){
+          console.log("FOREACH = "+answer);
           if(c==answer){
-              console.log("correct answer = " + answer);
+              console.log("MATCH ANSWER  = " + answer);
               b = true;
           }
       });

@@ -30,6 +30,7 @@ function World1()
 
     var me = this;
     start = 0;
+    var correct;
 
     playstate=0;
     mouseIsPressed=false;
@@ -51,7 +52,7 @@ function World1()
     ypos=nodesLocation[playstate][1];
     puzzle.initializeQuestion(nodesLocation[playstate][2]);
     //puzzle.initializeQuestion(nodesLocation[playstate+20][2]);//tells puzzle what question to display
-
+    var display = false;
     this.draw = function()
     {
         //DISPLAY BOARD
@@ -65,67 +66,92 @@ function World1()
         checkoverlap();
 
         mouseIsPressed=false;
-        drawSprites();
+
 
         puzzle.display(nodesLocation[playstate][2]);
+
+        drawSprites();
 
 
     }
 
     this.mousePressed = function()
     {
-      //CHECKS IF CLICKED INSIDE A BUTTON
-      for(i = 0; i < puzzle.buttonArray.length; i++)
-      {
-        if(puzzle.buttonArray[i].clicked(mouseX, mouseY))
+        correct = false;
+        var c = false;
+        //CHECKS IF CLICKED INSIDE A BUTTON
+        for(i = 0; i < puzzle.buttonArray.length; i++)
         {
-          puzzle.buttonArray[i].setSelected();
+            if(puzzle.buttonArray[i].clicked(mouseX, mouseY))
+            {
+                puzzle.buttonArray[i].setSelected();
 
-          console.log("butttonlength = "+puzzle.buttonArray.length +" i = "+i);
-          //CHECK IF THE BUTTON CLICKED IS THE NEXT BUTTON
-          //IF YES, REMOVE POP-UP AND MOVE PLAYER TO NEXT NODE
-          if(i == puzzle.buttonArray.length - 1)
-          {
-            puzzle.visible = false;//remove the pop-up
-              //console.log("if"+puzzle.checkanswer(puzzle.buttonArray[i][3]));
-            goToNextNode();//move player to next node
+                //CHECK IF THE BUTTON CLICKED IS THE NEXT BUTTON
+                //IF YES, REMOVE POP-UP AND MOVE PLAYER TO NEXT NODE
+                if(1 == puzzle.buttonArray.length){
+                    puzzle.visible = false;
+                    goToNextNode();//move player to next node
+                    puzzle.visible = true;//show next puzzle
+                    break;
+                }
+                else{
+                    if(puzzle.buttonArray[i].str == "NEXT"){
+                        correct = false;
+                        for(x = 0; x < puzzle.buttonArray.length; x++){
 
-            puzzle.visible = true;//show next puzzle
-              break;
-          }
-          else{
-              if(puzzle.checkanswer(puzzle.buttonArray[i].str)){
-                  puzzle.visible = false;//remove the pop-up
-                  //console.log("if"+puzzle.checkanswer(puzzle.buttonArray[i][3]));
-                  goToNextNode();//move player to next node
-                  puzzle.visible = true;//show next puzzle
-              }
-          }
+                            c = false;
+                            if(puzzle.buttonArray[x].selected == true && puzzle.buttonArray[x].str != "NEXT"){
+                                c =puzzle.checkanswer(puzzle.buttonArray[x].str);
+                                if(c){
+                                    puzzle.visible = false;
+                                    correct = true;
+                                    goToNextNode();//move player to next node
+                                    break;
+                                }
+
+                            }
+                        }
+                        if(correct == false){
+                            for(x = 0; x < puzzle.buttonArray.length; x++){
+                                console.log("selected = false;")
+                                puzzle.buttonArray[x].selected=false;
+                            }
+                        }
+                    }
+                }
+
+            }
+
         }
-      }
+    }
+
+    function proceed(){
+        // puzzle.visible = false;//remove the pop-up
+        // goToNextNode();//move player to next node
+        // puzzle.visible = true;//show next puzzle
     }
 
 
-    //checks to see if player has reached coordinates and set velocity to 0 so that it can stop moving.
+//checks to see if player has reached coordinates and set velocity to 0 so that it can stop moving.
     function checkoverlap() {
         if (player.overlapPoint(xpos, ypos))
         {
-            console.log("checkoverlap = "+playstate);
+            puzzle.visible = true;//show next puzzle
             player.setVelocity(0, 0);
         }
     }
-    //make player move to new attraction poing.
+//make player move to new attraction poing.
     function movePlayer()
     {
 
         player.attractionPoint(4, xpos, ypos);
 
     }
-    //set x and y posing
+//set x and y posing
     function setxy()
     {
-       // console.log(" playstate = " + playstate+ "xpos = "+nodesLocation[playstate-1][0] + "ypos = "+ nodesLocation[playstate-1][1] );
-
+        player.position.x = nodesLocation[playstate-1][0];
+        player.position.y = nodesLocation[playstate-1][1];
         xpos=nodesLocation[playstate][0];
         ypos=nodesLocation[playstate][1];
 
@@ -133,9 +159,12 @@ function World1()
 
     function goToNextNode()
     {
-      playstate++;
-      setxy();
-      movePlayer();
-      puzzle.initializeQuestion(nodesLocation[playstate][2]);
+
+        playstate++;
+
+        setxy();
+        movePlayer();
+        puzzle.initializeQuestion(nodesLocation[playstate][2]);
+
     }
 }

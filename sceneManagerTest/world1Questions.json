@@ -14,32 +14,28 @@
      "optionNum": 2,
      "option1": "Yes",
      "option2": "No",
-     "answer": "No",
-      "asked":false
+     "answer": "No"
     },
     {
       "question": "You fix your spaceship and are ready to go. You plot a course to your destination and are ready to make to the jump to hyperspace. Before you can go, the course must NOT have any obstacles in the way. You review the course and find that it is free of obstacles. Can you make the jump to hyperspace?",
       "optionNum": 2,
       "option1": "Yes",
       "option2": "No",
-      "answer": "Yes",
-      "asked":false
+      "answer": "Yes"
     },
     {
       "question": "You make the jump, arrive at the planet, and are ready to land. To land, the spaceship must NOT be going too fast. The speed indicator shows that the ship is in the correct speed range. Are you ready to land?",
       "optionNum": 2,
       "option1": "Yes",
       "option2": "No",
-      "answer": "Yes",
-      "asked":false
+      "answer": "Yes"
     },
     {
       "question": "Your first mission is to explore planet landmarks. You are required to explore a mountain OR valley. You look around and decide to explore a cave. Have you satisfied the mission objective?",
       "optionNum": 2,
       "option1": "Yes",
       "option2": "No",
-      "answer": "No",
-      "asked":false
+      "answer": "No"
     },
     {
       "question": "After exploring a nearby mountain, the next objective is gather samples from the planet. You can gather either rock OR dirt samples to complete this objective",
@@ -48,8 +44,7 @@
       "option2": "Liquid",
       "option3": "Dirt",
       "answer1": "Rock",
-      "answer2": "Dirt",
-      "asked":false
+      "answer2": "Dirt"
     },
     {
       "question": "You need to gather more information about the planet. You can measure the planet’s temperature OR gravity OR atmosphere in order to satisfy the mission objective.",
@@ -59,16 +54,14 @@
       "option3": "Gravity",
       "option4": "Moons",
       "answer1": "Temperature",
-      "answer2": "Gravity",
-      "asked":false
+      "answer2": "Gravity"
     },
     {
       "question": "In order to travel to the next planet, you need to plot a course for the new planet AND ensure you spaceship engines are working properly. You plot a course in the ship’s computer but forget to check the the ship’s engines. Are you ready to move on to the next planet?",
       "optionNum": 2,
       "option1": "Yes",
       "option2": "No",
-      "answer": "No",
-      "asked":false
+      "answer": "No"
     },
     {
       "question": "Your ship also needs to refill life support supplies. You need air AND water to continue on your adventure. Gather the necessary supplies",
@@ -77,8 +70,7 @@
       "option2": "Dirt",
       "option3": "Water",
       "answer1": "Air",
-      "answer2": "Water",
-      "asked":false
+      "answer2": "Water"
     },
     {
       "question": "Finally, the spaceship needs more Purple fuel crystals. In order to make more you need both Red AND Blue crystals. Choose the correct crystal pair to make your ship go.",
@@ -88,8 +80,7 @@
       "option3": "Blue",
       "option4": "Yellow",
       "answer1": "Red",
-      "answer2": "Blue",
-      "asked":false
+      "answer2": "Blue"
     },
     {
       "question": "other question.",
@@ -99,8 +90,7 @@
       "option3": "Blue",
       "option4": "Yellow",
       "answer1": "Red",
-      "answer2": "Blue",
-      "asked":false
+      "answer2": "Blue"
     },
     {
       "question": "Leaving world",
