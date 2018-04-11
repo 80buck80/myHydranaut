@@ -83,7 +83,7 @@ class Puzzle
           console.log("initialize question = "+targetNode);
           this.currentNode = targetNode;
           this.currentQuestion = this.questions[this.currentNode].question;
-      n = this.questions[this.currentNode].optionNum;
+          n = this.questions[this.currentNode].optionNum;
       }
     this.buttonArray = [];//clear the button array
     this.makePuzzleButtons();//fill the button array
