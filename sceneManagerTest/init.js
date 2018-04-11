@@ -88,8 +88,7 @@ class Puzzle
     this.buttonArray = [];//clear the button array
     this.makePuzzleButtons();//fill the button array
       //push the next button
-    this.nextButton = new Button(this.x + this.width - 50, this.y + this.height - 30, 5, "NEXT");
-    this.buttonArray.push(this.nextButton);
+
 
       var nodeNumber = this.currentNode;//current node number
       var buttonColumns;//holds puzzle divisions for buton placement
@@ -108,6 +107,8 @@ class Puzzle
       switch(n)
       {
           case 0:
+              this.nextButton = new Button(this.x + this.width - 50, this.y + this.height - 30, 5, "NEXT");
+              this.buttonArray.push(this.nextButton);
               break;
           case 2:
               strLengthArr.push(this.questions[nodeNumber].option1.length);
@@ -116,7 +117,10 @@ class Puzzle
               this.answer = [];
               this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
               this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
+              this.nextButton = new Button(this.x + this.width - 60, this.y + this.height - 30, 7, "SUBMIT");
+              this.buttonArray.push(this.nextButton);
               this.answer.push(this.questions[nodeNumber].answer);
+
               break;
 
           case 3:
@@ -127,6 +131,8 @@ class Puzzle
               this.buttonArray.push(new Button(this.x + buttonColumns*2, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
               this.buttonArray.push(new Button(this.x + buttonColumns*4, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
               this.buttonArray.push(new Button(this.x + buttonColumns*6, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option3));
+              this.nextButton = new Button(this.x + this.width - 50, this.y + this.height - 30, 7, "SUBMIT");
+              this.buttonArray.push(this.nextButton);
               this.answer = [];
               this.answer.push(this.questions[nodeNumber].answer1);
               this.answer.push(this.questions[nodeNumber].answer2);
@@ -142,6 +148,8 @@ class Puzzle
               this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
               this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option3));
               this.buttonArray.push(new Button(this.x + buttonColumns*7, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option4));
+              this.nextButton = new Button(this.x + this.width - 50, this.y + this.height - 30, 7, "SUBMIT");
+              this.buttonArray.push(this.nextButton);
               this.answer = [];
               this.answer.push(this.questions[nodeNumber].answer1);
               this.answer.push(this.questions[nodeNumber].answer2);
@@ -194,12 +202,10 @@ class Puzzle
     clear();
     this.visible = false;
   }
-//c = chosen string - check if answer match answer array
+//CHECK TO SEE IF CHOSEN BUTTON IS CORRECT C = STRING OF BUTTON
   checkanswer(c){
       var b = false;
-      console.log("CHECK ANSWER passed  " + c);
       this.answer.forEach(function(answer){
-          console.log("FOREACH = "+answer);
           if(c==answer){
               console.log("MATCH ANSWER  = " + answer);
               b = true;
@@ -289,6 +295,8 @@ class Button
 
     //BUTTON VISIBILITY
     this.visible = true;
+    //MOUSE IS OVER;
+    this.over = false;
 
     //BUTTON SELECTED STATE
     this.selected = false;
@@ -326,9 +334,32 @@ class Button
         textAlign(CENTER);
         text(this.str, this.buttonX, this.buttonY + 9);
       }
+      //MOUSE IS OVER BUTTON CHANGE COLOR.
+      if(this.over){
+          fill(10, 10, 10, 200);
+          stroke(0, 100, 150);
+          strokeWeight(3);
+          rectMode(CENTER);
+          rect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight, this.buttonRadius);
+
+          strokeWeight(0);
+          fill(46, 206, 245);
+          textSize(24);
+          textAlign(CENTER);
+          text(this.str, this.buttonX, this.buttonY + 9);
+      }
     }
   }
+  //check to see if mouse is over button.
+  mouseover(x,y){
+      var dx = abs(x - this.buttonX);
+      var dy = abs(y - this.buttonY);
+      if(dx <= this.buttonWidth && dy <= this.buttonHeight)
+      {
+          return true;
+      }
 
+  }
   //CHECK IF CLICK WAS MADE INSIDE THE BUTTON
   clicked(x, y)
   {

@@ -43,6 +43,7 @@
       "option1": "Rock",
       "option2": "Liquid",
       "option3": "Dirt",
+      "answer": "OR",
       "answer1": "Rock",
       "answer2": "Dirt"
     },
@@ -53,6 +54,7 @@
       "option2": "Atmosphere",
       "option3": "Gravity",
       "option4": "Moons",
+      "answer": "OR",
       "answer1": "Temperature",
       "answer2": "Gravity"
     },
@@ -69,6 +71,7 @@
       "option1": "Air",
       "option2": "Dirt",
       "option3": "Water",
+      "answer": "AND",
       "answer1": "Air",
       "answer2": "Water"
     },
@@ -79,6 +82,7 @@
       "option2": "Red",
       "option3": "Blue",
       "option4": "Yellow",
+      "answer": "AND",
       "answer1": "Red",
       "answer2": "Blue"
     },
@@ -94,6 +98,10 @@
     },
     {
       "question": "Leaving world",
+      "optionNum": 0
+    },
+    {
+      "question": "Wrong: Try agian",
       "optionNum": 0
     }
 
