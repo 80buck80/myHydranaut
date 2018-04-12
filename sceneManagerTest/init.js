@@ -114,11 +114,16 @@ class Puzzle
               strLengthArr.push(this.questions[nodeNumber].option1.length);
               strLengthArr.push(this.questions[nodeNumber].option2.length);
               maxLength = max(strLengthArr);
+
               this.answer = [];
-              this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8 - 30, maxLength, this.questions[nodeNumber].option1));
-              this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8 - 30, maxLength, this.questions[nodeNumber].option2));
-              this.nextButton = new Button(this.x + this.width/2, this.y + this.height - 25, 7, "SUBMIT");
-              this.buttonArray.push(this.nextButton);
+              // this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
+              // this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option2));
+              // this.nextButton = new Button(this.x + this.width - 60, this.y + this.height - 30, 7, "SUBMIT");
+              // this.buttonArray.push(this.nextButton);
+              this.buttonArray.push( new Button(this.x + this.width/2, this.y + this.height - 25, 7, "SUBMIT"));
+             // this.buttonArray.push(this.nextButton)
+              this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8 - 40, maxLength, this.questions[nodeNumber].option1));
+              this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8 - 40, maxLength, this.questions[nodeNumber].option2));
               this.answer.push(this.questions[nodeNumber].answer);
 
               break;
@@ -240,15 +245,15 @@ class Puzzle
 
 class Button
 {
-  constructor(x, y, width, str)
+  constructor(x, y, w, str)
   {
     //BUTTON LOCATION
     this.buttonX = x;
     this.buttonY = y;
 
     //BUTTON SIZE
-    this.buttonWidth = width/2*24 + 10;
-    this.buttonHeight = 30;
+    this.buttonWidth = w*18;
+    this.buttonHeight = 23;
     this.buttonRadius = 5;
 
     //BUTTON TEXT

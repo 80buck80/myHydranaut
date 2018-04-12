@@ -31,9 +31,9 @@ function World1()
         image(this.sceneManager.worldMap1, 0, 0, width, height);
 
         //if player has finished
-        if(playstate == 15 ){
-            endGame();
-        }
+        // if(playstate == 16 ){
+        //     endGame();
+        // }
 
         incorrect = false;
         //check to see if sprite is at node
@@ -85,8 +85,12 @@ function World1()
 
                 //CHECK TO SEE IF ITS A TUTORIAL ONLY ONE BUTTON = NEXT
                 if(1 == puzzle.buttonArray.length){
-                   //QUESTION WAS CORRECT.
-                    if(correct)
+                   // if player has finished
+                    if(playstate == 15 ){
+                        endGame();
+                    }
+
+                   else if(correct)
                         goToNextNode();//move player to next node
                     //SHOW PREVIOUS QUESTION.
                     else
@@ -142,9 +146,10 @@ function World1()
     function checkoverlap() {
         if (player.overlapPoint(xpos, ypos))
         {
-            puzzle.depth = -2;
-            puzzle.visible = true;//show next puzzle
             player.setVelocity(0, 0);
+            //puzzle.depth = -2;
+            puzzle.visible = true;//show next puzzle
+
         }
     }
 //make player move to new attraction poing.
@@ -216,6 +221,9 @@ function World1()
         //set velocity to 0 to make sure its not moving.
         player.velocity.y = 0;
         player.velocity.x = 0;
+        player.position.x = nodesLocation[playstate][0];
+        player.position.y = nodesLocation[playstate][1];
+
 
 
         puzzle = new Puzzle(world1Questions);//gives the puzzle class the set of world questions
