@@ -11,7 +11,7 @@ var planet1;
 var planet2;
 var planet3;
 var planet4;
-var p1;
+var p1,p2,p3;
 var spaceShadows;
 var diamonds;
 var button;
@@ -149,10 +149,10 @@ class Puzzle
               strLengthArr.push(this.questions[nodeNumber].option3.length);
               strLengthArr.push(this.questions[nodeNumber].option4.length);
               maxLength = max(strLengthArr);
-              this.buttonArray.push(new Button(this.x + buttonColumns*1, this.y + this.height/9*8 - 30, maxLength, this.questions[nodeNumber].option1));
-              this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8 - 30, maxLength, this.questions[nodeNumber].option2));
-              this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8 - 30, maxLength, this.questions[nodeNumber].option3));
-              this.buttonArray.push(new Button(this.x + buttonColumns*7, this.y + this.height/9*8 - 30, maxLength, this.questions[nodeNumber].option4));
+              this.buttonArray.push(new Button(this.x + buttonColumns*1, this.y + this.height/9*8 - 30, maxLength-2, this.questions[nodeNumber].option1));
+              this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8 - 30, maxLength-2, this.questions[nodeNumber].option2));
+              this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8 - 30, maxLength-2, this.questions[nodeNumber].option3));
+              this.buttonArray.push(new Button(this.x + buttonColumns*7, this.y + this.height/9*8 - 30, maxLength-2, this.questions[nodeNumber].option4));
               this.nextButton = new Button(this.x + this.width/2, this.y + this.height - 25, 7, "SUBMIT");
               this.buttonArray.push(this.nextButton);
               this.answer = [];
@@ -367,7 +367,7 @@ function preload()
     bkImage = loadImage('images/indexBG.jpg');
     hydra = loadImage('images/hydra.png');
     worldsMap = loadImage('images/worldsMap.png');
-    worldMap1 = loadImage('images/World1.png');
+    worldMap1 = loadImage('images/World2.png');
     player1Piece = loadImage('images/gamePiece.png');//load player piece (434X720)
     spaceShadows = loadImage('images/spaceShadows.png');
     diamonds = loadImage('images/diamonds1.png');
@@ -375,7 +375,10 @@ function preload()
 
 
     //load all sprites images.
-    p1 = loadAnimation('images/gamePieceSmall.png');//load player piece (48x80)
+    //p1 = loadAnimation('images/player-piece.png','images/player-piece2.png');
+    p1 = loadAnimation('images/player-piece2.png','images/player-piece3.png');//load player piece (48x80)
+    // p2 = loadAnimation('images/player-piece2.png');
+    // p3 = loadAnimation('images/player-piece3.png');
     planet1=loadAnimation("images/planet1.png");
     planet2=loadAnimation("images/planet2.png");
     planet3=loadAnimation("images/planet3.png");

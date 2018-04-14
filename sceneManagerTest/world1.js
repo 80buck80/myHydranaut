@@ -1,7 +1,7 @@
 var player;
 //var map;
 var xpos , ypos;
-var playstate,questionState;
+var playstate;
 var a;
 var i;
 var imgLoc;
@@ -217,7 +217,11 @@ function World1()
         player.addAnimation("normal", p1);
         //set max speed for when sprite moves.
         player.maxSpeed = 5;
-        player.scale = .5;
+        player.scale = .25;
+
+        player.setCollider("circle", 0,0, 50);
+        //collider type "rectangle", offset x, offset y, width, height
+       // player.setCollider("rectangle", 0, 0, 25, 25);
         //set velocity to 0 to make sure its not moving.
         player.velocity.y = 0;
         player.velocity.x = 0;
