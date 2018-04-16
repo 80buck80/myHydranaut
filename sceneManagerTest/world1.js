@@ -30,11 +30,6 @@ function World1()
         //DISPLAY BOARD
         image(this.sceneManager.worldMap1, 0, 0, width, height);
 
-        //if player has finished
-        // if(playstate == 16 ){
-        //     endGame();
-        // }
-
         incorrect = false;
         //check to see if sprite is at node
         checkoverlap();
@@ -46,10 +41,6 @@ function World1()
 
         //display question.
         puzzle.display(nodesLocation[playstate][2]);
-
-
-
-
     }
 
     //checks to see of mouse is over
@@ -103,34 +94,40 @@ function World1()
                     //CHECK IF THE BUTTON CLICKED IS THE NEXT BUTTON
                     if(puzzle.buttonArray[i].str == "SUBMIT"){
                         correct = false;
-                        var count = 0;
 
-                        for(x = 0; x < puzzle.buttonArray.length; x++){
-                            c = false;
-                            //IF BUTTONS IS SELECTED AND IT IS NOT THE NEXT BUTTON CHECK IF ITS CORRECT ANSWER
-                            if(puzzle.buttonArray[x].selected == true && puzzle.buttonArray[x].str != "SUBMIT"){
-                                count++;
-                                //RETURNS TRUE OF CORRECT ELSE RETURNS FALSE;
-                                c =puzzle.checkanswer(puzzle.buttonArray[x].str);
-                                if(c){
-                                    correct = true;
-                                    //GO TO NEXT NODE
-                                    goToNextNode();//move player to next node
-                                    break;
-                                }
+                        correct=puzzle.checkanswer(puzzle.buttonArray);
+                        console.log(correct);
 
-                            }
-                        }
-                       //RESET EACH BUTTON TO NOT SELECTED.
+                        //
+                        // for(x = 0; x < puzzle.buttonArray.length; x++){
+                        //     c = false;
+                        //     //IF BUTTONS IS SELECTED AND IT IS NOT THE NEXT BUTTON CHECK IF ITS CORRECT ANSWER
+                        //     if(puzzle.buttonArray[x].selected == true && puzzle.buttonArray[x].str != "SUBMIT"){
+                        //         count++;
+                        //         //RETURNS TRUE OF CORRECT ELSE RETURNS FALSE;
+                        //         c =puzzle.checkanswer(puzzle.buttonArray[x].str);
+                        //         if(c){
+                        //             correct = true;
+                        //             //GO TO NEXT NODE
+                        //             goToNextNode();//move player to next node
+                        //             break;
+                        //         }
+                        //
+                        //     }
+                        // }
+                      // RESET EACH BUTTON TO NOT SELECTED.
                         if(correct == false){
                             for(x = 0; x < puzzle.buttonArray.length; x++){
                                 console.log("selected = false;");
                                 puzzle.buttonArray[x].selected=false;
                             }
-                            console.log("count = "+count);
+
                             //no answer was selected don't show wrong
-                            if(count != 0)
+                            //if(count != 0)
                             puzzle.initializeQuestion(12);
+                        }
+                        else{
+                            goToNextNode();
                         }
                     }
                 }
@@ -156,7 +153,6 @@ function World1()
     function movePlayer()
     {
         player.attractionPoint(4, xpos, ypos);
-
     }
 //set x and y posing
     function setxy()
@@ -188,9 +184,9 @@ function World1()
     //initialize game this is needed if player comes back to game multiple times. it resets the game.
     function initGame(){
         nodesLocation = [
-            [200,423,20],
-            [200,423,21],
-            [200,423,1],
+            [200,410,20],
+            [200,410,21],
+            [200,410,1],
             [250,330,2],
             [290,229,22],
             [290,229,3],
@@ -214,15 +210,18 @@ function World1()
         mouseIsPressed=false;
         player.visible=true;
 
+
         player.addAnimation("normal", p1);
         //set max speed for when sprite moves.
         player.maxSpeed = 5;
-        player.scale = .25;
+        player.scale = .35;
+        //sets player collition detection point to be smaller then the actual sprite to.
+        player.setCollider("circle", 0,0,45);
+        playstate = 0;
+        //playstate = 7;
 
-        player.setCollider("circle", 0,0, 50);
-        //collider type "rectangle", offset x, offset y, width, height
-       // player.setCollider("rectangle", 0, 0, 25, 25);
         //set velocity to 0 to make sure its not moving.
+
         player.velocity.y = 0;
         player.velocity.x = 0;
         player.position.x = nodesLocation[playstate][0];
