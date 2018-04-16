@@ -14,7 +14,7 @@ var planet4;
 var p1,p2,p3;
 var spaceShadows;
 var diamonds;
-var button;
+var button, fontRegular;
 var dRed,dGreen,dOrange,dBlue,hRed,hBlue;
 
 
@@ -193,7 +193,8 @@ class Puzzle
             //PUZZLE TEXT
             strokeWeight(0);
             fill(255);
-            textSize(24);
+            textSize(20);
+            textFont(fontRegular);
             text(this.currentQuestion, this.x + 10, this.y + 25, 700, 300);
 
             //BUTTONS
@@ -438,6 +439,11 @@ class Button
 function preload()
 {
 
+    //load font
+    //fontRegular = loadFont('font/VT323-Regular.ttf');
+    fontRegular = loadFont('font/OverpassMono-Regular.ttf');
+    //fontRegular = loadFont('font/Combo-Regular.ttf');
+
     //load all images
     bkImage = loadImage('images/indexBG.jpg');
     hydra = loadImage('images/hydra.png');
@@ -451,9 +457,6 @@ function preload()
 
     //load all sprites images.
     p1 = loadAnimation('images/player-piece2.png','images/player-piece3.png');
-    //p1 = loadAnimation('images/player-piece2.png','images/player-piece3.png');//load player piece (48x80)
-    // p2 = loadAnimation('images/player-piece2.png');
-    // p3 = loadAnimation('images/player-piece3.png');
     planet1=loadAnimation("images/planet1.png");
     planet2=loadAnimation("images/planet2.png");
     planet3=loadAnimation("images/planet3.png");
@@ -482,6 +485,7 @@ function setup()
     var mgr = new SceneManager();
 
     //LOAD ALL IMAGES INTO THE SCENE MANAGER
+    mgr.fontRegular=fontRegular;
     mgr.bkImage = bkImage;
     mgr.hydra = hydra;
     mgr.worldsMap = worldsMap;
