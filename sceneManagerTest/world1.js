@@ -64,7 +64,7 @@ function World1()
     this.mousePressed = function()
     {
 
-        var c = false;
+       // var c = false;
         //CHECKS IF CLICKED INSIDE A BUTTON
         for(i = 0; i < puzzle.buttonArray.length; i++)
         {
@@ -94,27 +94,16 @@ function World1()
                     //CHECK IF THE BUTTON CLICKED IS THE NEXT BUTTON
                     if(puzzle.buttonArray[i].str == "SUBMIT"){
                         correct = false;
-
+                        var count = puzzle.selectcount();
+                        console.log("count of selected buttons = "+ count);
+                        if(count >1)
                         correct=puzzle.checkanswer(puzzle.buttonArray);
+
                         console.log(correct);
 
-                        //
-                        // for(x = 0; x < puzzle.buttonArray.length; x++){
-                        //     c = false;
-                        //     //IF BUTTONS IS SELECTED AND IT IS NOT THE NEXT BUTTON CHECK IF ITS CORRECT ANSWER
-                        //     if(puzzle.buttonArray[x].selected == true && puzzle.buttonArray[x].str != "SUBMIT"){
-                        //         count++;
-                        //         //RETURNS TRUE OF CORRECT ELSE RETURNS FALSE;
-                        //         c =puzzle.checkanswer(puzzle.buttonArray[x].str);
-                        //         if(c){
-                        //             correct = true;
-                        //             //GO TO NEXT NODE
-                        //             goToNextNode();//move player to next node
-                        //             break;
-                        //         }
-                        //
-                        //     }
-                        // }
+                        //console.log("count of selected buttons = "+ count);
+
+
                       // RESET EACH BUTTON TO NOT SELECTED.
                         if(correct == false){
                             for(x = 0; x < puzzle.buttonArray.length; x++){
@@ -123,7 +112,7 @@ function World1()
                             }
 
                             //no answer was selected don't show wrong
-                            //if(count != 0)
+                            if(count > 1)
                             puzzle.initializeQuestion(12);
                         }
                         else{

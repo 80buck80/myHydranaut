@@ -212,6 +212,18 @@ class Puzzle
         clear();
         this.visible = false;
     }
+
+    selectcount(){
+        var count = 0;
+        this.buttonArray.forEach(function(b){
+            //console.log("FOREACH = "+answer);
+            if(b.selected==true){
+                console.log("count incremented");
+                count++;
+            }
+        });
+        return count;
+    }
 //CHECK TO SEE IF CHOSEN BUTTON IS CORRECT C = STRING OF BUTTON
     checkanswer(a){
         var count = 0;
@@ -220,12 +232,13 @@ class Puzzle
         console.log("type = "+t);
 
 
-        var b = false;
-        for(var x = 0; x < a.length; x++){
+        var b = true;
+        for(var x = 0; x < a.length && b == true; x++){
             if(a[x].selected==true){
                 console.log("selected answersss 1111= "+ this.buttonArray[x].str);
                 if( this.buttonArray[x].str != "SUBMIT"){
-                    console.log("selected answersss222222 = "+ this.buttonArray[x].str);
+                    b = false;
+                    //console.log("selected answersss222222 = "+ this.buttonArray[x].str);
                     for(var y=0;y<this.answer.length;y++){
                         if(this.buttonArray[x].str==this.answer[y]){
                             b=true;
@@ -234,19 +247,13 @@ class Puzzle
                             count++;
                             break;
                         }
-                        // else{
-                        //     b = false;
-                        //     console.log("SELECTED INCORRECT");
-                        //     console.log(this.buttonArray[x].str + this.answer[y] +"INCORRECT");
-                        //     return b;
-                        //     break;
-                        // }
                     }
+                    //b = false;
                 }
             }
             else{
                 if(this.buttonArray[x].str != "SUBMIT"){
-                   // b = false;
+                    b = false;
                     for(var y=0;y<this.answer.length;y++){
                         if(a[x].str==this.answer[y]){
                             if(t == "AND"){
@@ -259,7 +266,7 @@ class Puzzle
                         }
                         // else {
                         //     console.log("NOT SELECTED CORRECT");
-                        //     b = true;
+                             b = true;
                         //
                         // }
                     }
@@ -274,7 +281,7 @@ class Puzzle
             else
                 b = false;
         }
-        else if(t=="OR"){
+        else if(t=="OR" && b == true){
             if(count > 0 ){
                 b = true;
             }
