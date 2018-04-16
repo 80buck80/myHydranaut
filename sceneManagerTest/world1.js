@@ -37,6 +37,7 @@ function World1()
         checkoverlap();
         //check to see if mouse over button
         changeColor();
+        //check to see if rocket has launched
         if(rocket.position.y < 0)
             endGame();
             //cloud.position.x = 0;
@@ -56,14 +57,11 @@ function World1()
             if(c){
                 puzzle.buttonArray[i].over = true;
                 break;
-
             }
             else{
                 puzzle.buttonArray[i].over = false;
             }
         }
-
-
     }
 
     this.mousePressed = function()
@@ -171,6 +169,7 @@ function World1()
         puzzle.initializeQuestion(nodesLocation[playstate][2]);
 
     }
+
     function moveRocket(){
         player.visible=false;
         rocket.visible=true;
