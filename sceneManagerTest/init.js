@@ -481,7 +481,7 @@ function preload()
     //LOAD WORLD QUESTIONS FROM JSON FILE
 
     world1Questions = loadJSON("world1Questions.json");
-    //world2Questions = loadJSON("world2Questions.json");
+    world2Questions = loadJSON("world2Questions.json");
 
 }
 
