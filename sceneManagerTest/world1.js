@@ -211,19 +211,21 @@ function World1()
        // console.log(world);
 
         rocket = createSprite(960,130);
+        rocket.addAnimation("rocket3", R1);
+        //check to see which world was passed and load correct questions, board, and rocket.
         if(me.sceneArgs == "World3"){
-            rocket.addAnimation("rocket1", R3);
+           // rocket.addAnimation("rocket1", R3);
             puzzle = new Puzzle(world1Questions);
             wm = me.sceneManager.worldMap3;
         }
         else if(me.sceneArgs == "World2"){
-            rocket.addAnimation("rocket2", R2);
+            //rocket.addAnimation("rocket2", R2);
             puzzle = new Puzzle(world2Questions);
            wm = me.sceneManager.worldMap2;
         }
         else{
             console.log("wrold1 was selected");
-            rocket.addAnimation("rocket3", R1);
+            //rocket.addAnimation("rocket3", R1);
             puzzle = new Puzzle(world1Questions);
             wm = me.sceneManager.worldMap1;
         }
@@ -249,7 +251,7 @@ function World1()
         player.setCollider("circle", 0,0,45);
         rocket.setCollider("circle",0,0,1);
         playstate = 0;
-        playstate = 8;
+       // playstate = 8;
 
         //set velocity to 0 to make sure its not moving.
 

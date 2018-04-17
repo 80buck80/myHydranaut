@@ -471,8 +471,8 @@ function preload()
 
 
     R1=loadAnimation("images/ROCKIT-World1.png");
-    R2=loadAnimation("rocket1","images/ROCKIT-Wold2.png");
-    R3=loadAnimation("rocket3","images/ROCKIT-Wold3.png");
+   // R2=loadAnimation("images/ROCKIT-Wold2.png");
+    //R3=loadAnimation("images/ROCKIT-Wold3.png");
     // dGreen=loadAnimation("images/DG2.png");
     // dOrange==loadAnimation("images/DY2.png");
     // dBlue=loadAnimation("images/DB2.png");
