@@ -80,7 +80,7 @@ function World1()
                 //CHECK TO SEE IF ITS A TUTORIAL ONLY ONE BUTTON = NEXT
                 if(1 == puzzle.buttonArray.length){
                    // if player has finished
-                    if(playstate == 15 ){
+                    if(playstate == 14 ){
                         console.log("MOVING ROCKET MOVING ROCKET MOVING ROCKET");
                         moveRocket();
                         //endGame();
@@ -147,7 +147,7 @@ function World1()
 //make player move to new attraction poing.
     function movePlayer()
     {
-        player.attractionPoint(4, xpos, ypos);
+        player.attractionPoint(2, xpos, ypos);
     }
 //set x and y posing
     function setxy()
@@ -190,20 +190,19 @@ function World1()
         nodesLocation = [
             [200,410,20],
             [200,410,21],
-            [200,410,1],
-            [250,330,2],
+            [250,330,1],
             [290,229,22],
-            [290,229,3],
-            [338,137,4],
-            [599,155,5],
+            [290,229,2],
+            [338,137,3],
+            [599,155,4],
             [579,263,23],
-            [579,263,6],
-            [570,395,7],
+            [579,263,5],
+            [570,395,6],
             [905,375,24],
-            [905,375,8],
-            [860,225,9],
-            [837,130,10],
-            [960,130,11]
+            [905,375,7],
+            [860,225,8],
+            [837,130,9],
+            [960,130,10]
         ];
 
         rocket = createSprite(960,130);
@@ -230,7 +229,7 @@ function World1()
         player.setCollider("circle", 0,0,45);
         rocket.setCollider("circle",0,0,1);
         playstate = 0;
-        //playstate = 13;
+        playstate = 8;
 
         //set velocity to 0 to make sure its not moving.
 
