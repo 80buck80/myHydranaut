@@ -50,8 +50,8 @@
     {
       "question": "You need to gather more information about the planet. You can measure the planet’s temperature OR atmosphere in order to satisfy the mission objective.",
       "optionNum": 3,
-      "option1": "Temp",
-      "option2": "Atm",
+      "option1": "Temperature",
+      "option2": "Atmosphere",
       "option3": "Moons",
       "answer": "OR",
       "answer1": "Temp",
