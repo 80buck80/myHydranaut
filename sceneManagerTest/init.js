@@ -118,6 +118,16 @@ class Puzzle
                 strLengthArr.push(this.questions[nodeNumber].option1.length);
                 strLengthArr.push(this.questions[nodeNumber].option2.length);
                 maxLength = max(strLengthArr);
+                var m=20;
+                //conole.log("maxLength");
+                if(maxLength > 15){
+                    maxLength -= 7;
+                    m=85;
+                }
+                else if(maxLength > 10){
+                   // maxLength -= 1;
+                    m=60;
+                }
 
                 this.answer = [];
                 // this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8, maxLength, this.questions[nodeNumber].option1));
@@ -126,8 +136,8 @@ class Puzzle
                 // this.buttonArray.push(this.nextButton);
                 this.buttonArray.push( new Button(this.x + this.width/2, this.y + this.height - 25, 7, "SUBMIT"));
                 // this.buttonArray.push(this.nextButton)
-                this.buttonArray.push(new Button(this.x + buttonColumns*3, this.y + this.height/9*8 - 40, maxLength, this.questions[nodeNumber].option1));
-                this.buttonArray.push(new Button(this.x + buttonColumns*5, this.y + this.height/9*8 - 40, maxLength, this.questions[nodeNumber].option2));
+                this.buttonArray.push(new Button((this.x + buttonColumns*3)-m, this.y + this.height/9*8 - 40, maxLength, this.questions[nodeNumber].option1));
+                this.buttonArray.push(new Button((this.x + buttonColumns*5)+m, this.y + this.height/9*8 - 40, maxLength, this.questions[nodeNumber].option2));
                 this.answer.push(this.questions[nodeNumber].answer);
 
 
@@ -326,6 +336,11 @@ class Button
     constructor(x, y, w, str)
     {
         //BUTTON LOCATION
+        console.log("x = "+x+" y = "+y+ " w = "+ w);
+        // if(x > 11){
+        //     w = w-7;
+        //     y = y - 10;
+        // }
         this.buttonX = x;
         this.buttonY = y;
 
@@ -360,7 +375,7 @@ class Button
 
                 strokeWeight(0);
                 fill(255, 255, 255);
-                textSize(24);
+                textSize(20);
                 textAlign(CENTER);
                 text(this.str, this.buttonX, this.buttonY + 9);
             }
@@ -374,7 +389,7 @@ class Button
 
                 strokeWeight(0);
                 fill(46, 206, 245);
-                textSize(24);
+                textSize(20);
                 textAlign(CENTER);
                 //text(this.str, this.buttonX, this.buttonY);
                 text(this.str, this.buttonX, this.buttonY + 9);
@@ -389,7 +404,7 @@ class Button
 
                 strokeWeight(0);
                 fill(0, 100, 150);
-                textSize(24);
+                textSize(20);
                 textAlign(CENTER);
                 text(this.str, this.buttonX, this.buttonY + 9);
             }
