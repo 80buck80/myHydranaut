@@ -119,7 +119,7 @@ function World1()
 
                             //no answer was selected don't show wrong
                             if(count > 1)
-                            puzzle.initializeQuestion(12);
+                            puzzle.initializeQuestion(11);
                         }
                         else{
                             goToNextNode();
