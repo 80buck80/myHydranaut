@@ -7,7 +7,7 @@ var i;
 var imgLoc;
 
 
-function World1(w)
+function World1()
 {
     var nodesLocation;
     var correct;
@@ -18,7 +18,9 @@ function World1(w)
     var me = this;
     var rocket;
     var world;
-    world= w;
+    var wm;
+    //console.log(w);
+
     //this is the first function that runs. it is needed when player comes back to this world it clear states.
     this.enter = function()
     {
@@ -31,7 +33,7 @@ function World1(w)
     {
         //DISPLAY BOARD
         clear();
-        image(this.sceneManager.worldMap1, 0, 0, width, height);
+        image(wm, 0, 0, width, height);
 
         incorrect = false;
         //check to see if sprite is at node
@@ -205,16 +207,26 @@ function World1(w)
             [837,130,9],
             [960,130,10]
         ];
-        if(world = "World1"){
+       // world = me.sceneArgs;
+       // console.log(world);
 
+        rocket = createSprite(960,130);
+        if(me.sceneArgs == "World3"){
+            rocket.addAnimation("rocket1", R3);
+            puzzle = new Puzzle(world1Questions);
+            wm = me.sceneManager.worldMap3;
         }
-        else if(world = "World2"){
-
+        else if(me.sceneArgs == "World2"){
+            rocket.addAnimation("rocket2", R2);
+            puzzle = new Puzzle(world2Questions);
+           wm = me.sceneManager.worldMap2;
         }
         else{
-
+            console.log("wrold1 was selected");
+            rocket.addAnimation("rocket3", R1);
+            puzzle = new Puzzle(world1Questions);
+            wm = me.sceneManager.worldMap1;
         }
-        rocket = createSprite(960,130);
 
         correct=true;
 
@@ -227,7 +239,6 @@ function World1(w)
 
 
         player.addAnimation("normal", p1);
-        rocket.addAnimation("rocket1", R1);
         rocket.scale = .25;
         //set max speed for when sprite moves.
         player.maxSpeed = 5;
@@ -249,7 +260,7 @@ function World1(w)
 
 
 
-        puzzle = new Puzzle(world1Questions);//gives the puzzle class the set of world questions
+        //puzzle = new Puzzle(world1Questions);//gives the puzzle class the set of world questions
         var buttonArray = [];
 
         console.log("init "+nodesLocation[playstate][2]);

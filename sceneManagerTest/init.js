@@ -3,7 +3,7 @@ var gameHeight;
 var bkImage;
 var hydra;
 var worldsMap;
-var worldMap1;
+var worldMap1,worldMap2,worldMap3;
 var player1Piece;//temp player token
 var nodeImageArr;
 var world1Questions,world2Questions,world3Questions;
@@ -15,7 +15,7 @@ var p1;
 var spaceShadows;
 var diamonds;
 var button, fontRegular;
-var R1;
+var R1,R2,R3;
 
 
 
@@ -454,6 +454,8 @@ function preload()
     hydra = loadImage('images/hydra.png');
     worldsMap = loadImage('images/worldsMap.png');
     worldMap1 = loadImage('images/World2.png');
+    worldMap2 = loadImage('images/World3.png');
+    worldMap3 = loadImage('images/World4.png');
     player1Piece = loadImage('images/gamePiece.png');//load player piece (434X720)
     spaceShadows = loadImage('images/spaceShadows.png');
     diamonds = loadImage('images/diamonds1.png');
@@ -469,9 +471,8 @@ function preload()
 
 
     R1=loadAnimation("images/ROCKIT-World1.png");
-    //rocket=loadAnimation("rocket1","images/ROCKIT-Wold1.png");
-    // rocket=loadAnimation("rocket2","images/ROCKIT-Wold2.png");
-    // rocket=loadAnimation("rocket3","images/ROCKIT-Wold3.png");
+    R2=loadAnimation("rocket1","images/ROCKIT-Wold2.png");
+    R3=loadAnimation("rocket3","images/ROCKIT-Wold3.png");
     // dGreen=loadAnimation("images/DG2.png");
     // dOrange==loadAnimation("images/DY2.png");
     // dBlue=loadAnimation("images/DB2.png");
@@ -502,6 +503,8 @@ function setup()
     mgr.hydra = hydra;
     mgr.worldsMap = worldsMap;
     mgr.worldMap1 = worldMap1;
+    mgr.worldMap2 = worldMap2;
+    mgr.worldMap3 = worldMap3;
     mgr.player1Piece = player1Piece;
 
     mgr.planet1=planet1;
@@ -510,8 +513,8 @@ function setup()
     mgr.planet4=planet4;
 
     mgr.R1=R1;
-    // mgr.dGreen=dGreen;
-    // mgr.dOrange=dOrange;
+    mgr.R2=R2;
+    mgr.R3=R3;
     // mgr.dBlue=dBlue;
     // mgr.hRed=hRed;
     // mgr.hBlue=hBlue;
