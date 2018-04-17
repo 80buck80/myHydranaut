@@ -138,9 +138,9 @@ class Puzzle
                 strLengthArr.push(this.questions[nodeNumber].option2.length);
                 strLengthArr.push(this.questions[nodeNumber].option3.length);
                 maxLength = max(strLengthArr);
-                this.buttonArray.push(new Button(this.x + buttonColumns*2, this.y + this.height/9*8 - 30, maxLength, this.questions[nodeNumber].option1));
+                this.buttonArray.push(new Button(this.x + buttonColumns*1 + 20, this.y + this.height/9*8 - 30, maxLength, this.questions[nodeNumber].option1));
                 this.buttonArray.push(new Button(this.x + buttonColumns*4, this.y + this.height/9*8 - 30, maxLength, this.questions[nodeNumber].option2));
-                this.buttonArray.push(new Button(this.x + buttonColumns*6, this.y + this.height/9*8 - 30, maxLength, this.questions[nodeNumber].option3));
+                this.buttonArray.push(new Button(this.x + buttonColumns*7 - 20, this.y + this.height/9*8 - 30, maxLength, this.questions[nodeNumber].option3));
                 this.nextButton = new Button(this.x + this.width/2, this.y + this.height - 25, 7, "SUBMIT");
                 this.buttonArray.push(this.nextButton);
                 this.answer = [];
