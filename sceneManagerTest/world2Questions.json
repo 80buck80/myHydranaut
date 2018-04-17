@@ -9,7 +9,11 @@
     \t\tthen you can land on the planet.\n
     \tELSE,\n
     \t\tyou must move on to the next planet.\n\n
-    We’ve used the Boolean operator AND in this example. Here both conditions must be true in order for you to proceed. The planet must be both rocky and have an atmosphere so you can land your spaceship. If either one of these are not true then you would have to move on to the next planet.\n\n"]],
+    We’ve used the Boolean operator AND in this example. Here both conditions must be true in order for you to proceed. The planet must be both rocky and have an atmosphere so you can land your spaceship. If either one of these are not true then you would have to move on to the next planet.\n\n"],
+      [],
+      [],
+    [],
+    []],
     "optionNum": 0
    },
    {

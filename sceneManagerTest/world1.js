@@ -7,7 +7,7 @@ var i;
 var imgLoc;
 
 
-function World1()
+function World1(w)
 {
     var nodesLocation;
     var correct;
@@ -17,7 +17,8 @@ function World1()
     player = createSprite(200, 423);
     var me = this;
     var rocket;
-
+    var world;
+    world= w;
     //this is the first function that runs. it is needed when player comes back to this world it clear states.
     this.enter = function()
     {
@@ -204,7 +205,15 @@ function World1()
             [837,130,9],
             [960,130,10]
         ];
+        if(world = "World1"){
 
+        }
+        else if(world = "World2"){
+
+        }
+        else{
+
+        }
         rocket = createSprite(960,130);
 
         correct=true;

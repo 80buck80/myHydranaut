@@ -6,7 +6,7 @@ var worldsMap;
 var worldMap1;
 var player1Piece;//temp player token
 var nodeImageArr;
-var world1Questions;
+var world1Questions,world2Questions,world3Questions;
 var planet1;
 var planet2;
 var planet3;
@@ -479,7 +479,10 @@ function preload()
     // hBlue=loadAnimation("images/BH1.png");
 
     //LOAD WORLD QUESTIONS FROM JSON FILE
+
     world1Questions = loadJSON("world1Questions.json");
+   // world2Questions = loadJSON("world2Questions.json");
+
 }
 
 function setup()
