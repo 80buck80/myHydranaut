@@ -250,7 +250,7 @@ function World1()
         player.setCollider("circle", 0,0,45);
         rocket.setCollider("circle",0,0,1);
         playstate = 0;
-        playstate = 4;
+        //playstate = 4;
 
         //set velocity to 0 to make sure its not moving.
 
