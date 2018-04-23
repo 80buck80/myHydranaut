@@ -203,10 +203,14 @@ class Puzzle
             rect(this.x, this.y, this.width, this.height, this.radius);
 
             //PUZZLE TEXT
+
             strokeWeight(0);
             fill(255);
             textSize(20);
             textFont(fontRegular);
+            if(this.currentQuestion.length >150 ){
+                textSize(16);
+            }
             text(this.currentQuestion, this.x + 10, this.y + 25, 700, 300);
 
             //BUTTONS
