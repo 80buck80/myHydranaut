@@ -77,13 +77,13 @@ class Puzzle
         if(targetNode > 19) {
             this.currentNode = targetNode;//set new current node
 
-            console.log("initialize tutorial = "+ this.currentNode);
+            //console.log("initialize tutorial = "+ this.currentNode);
             this.currentQuestion = this.questions[0].tutorial[targetNode-20];
             n = 0;
         }
 
         else{
-            console.log("initialize question = "+targetNode);
+            //console.log("initialize question = "+targetNode);
             this.currentNode = targetNode;
             this.currentQuestion = this.questions[this.currentNode].question;
             n = this.questions[this.currentNode].optionNum;
@@ -98,7 +98,7 @@ class Puzzle
         var strLengthArr = [];//holds string lengths to be compaired
         var maxLength;//holds the largest string length of an answer button
 
-        console.log("Make puzzle = "+ this.currentNode);
+       // console.log("Make puzzle = "+ this.currentNode);
         //DIVIDE PUZZLE INTO COLUMNS FOR BUTTONS TO SIT IN
         buttonColumns = this.width/8;
 
@@ -208,11 +208,11 @@ class Puzzle
             fill(255);
             textSize(20);
             textFont(fontRegular);
-            if(this.currentQuestion.length >150 ){
+            if(this.currentQuestion.length >300 ){
                 textSize(16);
             }
             text(this.currentQuestion, this.x + 10, this.y + 25, 700, 300);
-
+            //console.log("size of text = "+ this.currentQuestion.length);
             //BUTTONS
             for(i = 0; i < this.buttonArray.length; i++)
             {
@@ -252,14 +252,14 @@ class Puzzle
         var b = true;
         for(var x = 0; x < a.length && b == true; x++){
             if(a[x].selected==true){
-                console.log("selected answersss 1111= "+ this.buttonArray[x].str);
+               // console.log("selected answersss 1111= "+ this.buttonArray[x].str);
                 if( this.buttonArray[x].str != "SUBMIT"){
                     b = false;
                     //console.log("selected answersss222222 = "+ this.buttonArray[x].str);
                     for(var y=0;y<this.answer.length;y++){
                         if(this.buttonArray[x].str==this.answer[y]){
                             b=true;
-                            console.log("SELECTED CORRECT");
+                          //  console.log("SELECTED CORRECT");
                             console.log(this.buttonArray[x].str + this.answer[y] +" correct");
                             count++;
                             break;
@@ -475,9 +475,9 @@ function preload()
     worldMap1 = loadImage('images/World2.png');
     worldMap2 = loadImage('images/World3.png');
     worldMap3 = loadImage('images/World4.png');
-    player1Piece = loadImage('images/gamePiece.png');//load player piece (434X720)
+   // player1Piece = loadImage('images/gamePiece.png');//load player piece (434X720)
     spaceShadows = loadImage('images/spaceShadows.png');
-    diamonds = loadImage('images/diamonds1.png');
+
 
 
 
