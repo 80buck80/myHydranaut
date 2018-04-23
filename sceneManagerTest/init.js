@@ -547,7 +547,7 @@ function setup()
     mgr.wire();
 
     //SWITCH TO THE FRONT PAGE
-    mgr.showScene(FrontPage);
+    mgr.showScene(WorldPage);
 }
 
 function windowResized() {
